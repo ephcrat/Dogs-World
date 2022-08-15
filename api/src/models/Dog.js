@@ -1,4 +1,4 @@
-const { Op, Model, DataTypes } = require("sequelize");
+const { Model, DataTypes } = require("sequelize");
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 class Dog extends Model {}

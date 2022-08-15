@@ -1,4 +1,3 @@
-const axios = require("axios");
 const { Router } = require("express");
 const { Dog, Temperament } = require("../db");
 const { getDogs, getDogsId } = require("./helpers");

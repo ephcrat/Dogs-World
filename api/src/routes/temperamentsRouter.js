@@ -1,15 +1,14 @@
-const axios = require("axios");
 const { Router } = require("express");
-const { Op, Temperament } = require("../db");
+const { Temperament } = require("../db");
+const { getDogs } = require("./helpers");
 const router = Router();
 
 router.get("/", async (req, res) => {
   try {
-    const dogs = await axios.get("https://api.thedogapi.com/v1/breeds");
-    const dogsTemperaments = dogs.data
-      .map((dog) => dog.temperament)
-      .flatMap((t) => t?.split(", "))
-      .filter((t) => t !== undefined);
+    const dogs = await getDogs();
+    const dogsTemperaments = dogs
+      .flatMap((dog) => dog.temperament)
+      .filter(Boolean);
 
     dogsTemperaments.forEach((t) =>
       Temperament.findOrCreate({

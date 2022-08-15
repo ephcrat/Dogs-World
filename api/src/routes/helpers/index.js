@@ -1,4 +1,5 @@
 const axios = require("axios");
+const { BASE_URL } = process.env;
 
 //place = api (default) or db. Formats the response object hence the dogs from the DB and the dogs from the API have the same attributes, and the values are in the same format.
 const formatDogs = function (array, place = "api") {
@@ -13,7 +14,7 @@ const formatDogs = function (array, place = "api") {
           height: dog.height,
           life_span: dog.life_span,
           origin: dog.origin,
-          temperaments: dog.Temperaments.map((t) => t.name),
+          temperament: dog.Temperaments.map((t) => t.name),
         })
     );
   }
@@ -27,7 +28,7 @@ const formatDogs = function (array, place = "api") {
         height: dog.height.metric,
         life_span: dog.life_span,
         origin: dog.origin === "" ? null : dog.origin,
-        temperaments: dog.temperament?.split(", "),
+        temperament: dog.temperament?.split(", "),
       })
   );
 };
@@ -35,9 +36,7 @@ const formatDogs = function (array, place = "api") {
 const getDogs = async function (name) {
   if (name) {
     name = `${name[0].toUpperCase()}${name.slice(1).toLowerCase()}`; //first letter in uppercase and the rest in lowercase
-    const breedName = await axios.get(
-      `https://api.thedogapi.com/v1/breeds/search?q=${name}`
-    );
+    const breedName = await axios.get(`${BASE_URL}/search?q=${name}`);
     if (!breedName) throw new Error("Breed not found");
     const dogsApi = formatDogs(breedName.data);
     const dogsDb = await Dog.findAll({
@@ -56,7 +55,7 @@ const getDogs = async function (name) {
     return allDogs;
   }
 
-  const dogsApi = await axios.get("https://api.thedogapi.com/v1/breeds");
+  const dogsApi = await axios.get(BASE_URL);
   const dogsApiFiltered = formatDogs(dogsApi.data);
   const dogsDb = await Dog.findAll({
     include: {
