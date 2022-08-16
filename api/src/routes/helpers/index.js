@@ -1,8 +1,8 @@
 const axios = require("axios");
 const { BASE_URL } = process.env;
 
-//place = api (default) or db. Formats the response object hence the dogs from the DB and the dogs from the API have the same attributes, and the values are in the same format.
-const formatDogs = function (array, place = "api") {
+//place = api (default) or db. Formats the response object with the detailed data hence the dogs from the DB and the dogs from the API have the same attributes, and the values are in the same format.
+const formatDetailedDogs = function (array, place = "api") {
   if (place !== "api") {
     return array.map(
       (dog) =>
@@ -33,12 +33,20 @@ const formatDogs = function (array, place = "api") {
   );
 };
 
+const formatDogs = async function (array) {
+  //return only the data needed for the main route (id, name, weight, temperaments)
+  return (dogs = array.map((dog) => {
+    let { height, life_span, origin, ...rest } = dog;
+    return rest;
+  }));
+};
+
 const getDogs = async function (name) {
   if (name) {
     name = `${name[0].toUpperCase()}${name.slice(1).toLowerCase()}`; //first letter in uppercase and the rest in lowercase
     const breedName = await axios.get(`${BASE_URL}/search?q=${name}`);
     if (!breedName) throw new Error("Breed not found");
-    const dogsApi = formatDogs(breedName.data);
+    const dogsApi = formatDetailedDogs(breedName.data);
     const dogsDb = await Dog.findAll({
       where: { name: name },
       include: {
@@ -51,12 +59,12 @@ const getDogs = async function (name) {
       },
     });
 
-    const allDogs = formatDogs(dogsDb, "db").concat(dogsApi);
+    const allDogs = formatDetailedDogs(dogsDb, "db").concat(dogsApi);
     return allDogs;
   }
 
   const dogsApi = await axios.get(BASE_URL);
-  const dogsApiFiltered = formatDogs(dogsApi.data);
+  const dogsApiFiltered = formatDetailedDogs(dogsApi.data);
   const dogsDb = await Dog.findAll({
     include: {
       model: Temperament,
@@ -66,7 +74,7 @@ const getDogs = async function (name) {
       },
     },
   });
-  const allDogs = formatDogs(dogsDb, "db").concat(dogsApiFiltered);
+  const allDogs = formatDetailedDogs(dogsDb, "db").concat(dogsApiFiltered);
   return allDogs;
 };
 
@@ -78,4 +86,4 @@ const getDogsId = async function (id) {
   return dog;
 };
 
-module.exports = { getDogs, getDogsId };
+module.exports = { getDogs, getDogsId, formatDogs };

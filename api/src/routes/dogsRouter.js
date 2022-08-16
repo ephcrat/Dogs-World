@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { Dog, Temperament } = require("../db");
-const { getDogs, getDogsId } = require("./helpers");
+const { getDogs, getDogsId, formatDogs } = require("./helpers");
 const router = Router();
 
 router.get("/", async (req, res) => {
@@ -8,10 +8,12 @@ router.get("/", async (req, res) => {
   try {
     if (name) {
       const dogsByName = await getDogs(name);
-      return res.json(dogsByName);
+      const dogs = await formatDogs(dogsByName); //return only the necessary data for the main route
+      return res.json(dogs);
     }
     const dogs = await getDogs();
-    return res.json(dogs);
+    const dogsFormated = await formatDogs(dogs);
+    res.json(dogsFormated);
   } catch (err) {
     console.error(err);
     res.status(404).send(err.message);
