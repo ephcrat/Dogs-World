@@ -15,7 +15,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/dogs" element={<Home />} />
         <Route path="/dogs/create-dog" element={<CreateDog />} />
-        <Route path="/dogs/:id" element={<DogDetails />} />
+        <Route path="/dogs/:name" element={<DogDetails />} />
         <Route path="*" element={<Empty />} />
       </Routes>
     </BrowserRouter>

@@ -22,8 +22,9 @@ const formatDetailedDogs = function (array, place = "api") {
     (dog) =>
       (dog = {
         id: dog.id,
-        name: dog.name,
-        weight: dog.weight.metric,
+        name: dog.name.replace(/[^a-zA-Z ]/g, ""),
+        weight:
+          dog.weight.metric === "NaN" ? dog.weight.imperial : dog.weight.metric,
         image: `https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`,
         height: dog.height.metric,
         life_span: dog.life_span,
@@ -78,10 +79,10 @@ const getDogs = async function (name) {
   return allDogs;
 };
 
-const getDogsId = async function (id) {
+const getDogsId = async function (name) {
   const dogs = await getDogs();
-  const parseId = id.length < 20 ? parseInt(id) : id; //if it's not an UUID, convert it to an integer
-  const dog = dogs.find((dog) => dog.id === parseId);
+  // const parseId = id.length < 20 ? parseInt(id) : id; //if it's not an UUID, convert it to an integer
+  const dog = dogs.find((dog) => dog.name === name);
   if (!dog) throw new Error("id not found");
   return dog;
 };

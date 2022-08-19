@@ -1,9 +1,12 @@
-import React from 'react'
+
 
 function DogGrid() {
+
   return (
-    <div>DogGrid</div>
-  )
+    <div>
+      DogGrid
+    </div>
+  );
 }
 
-export default DogGrid
+export default DogGrid;
