@@ -1,0 +1,31 @@
+.element {
+  height: 18rem;
+  width: 16rem;
+  border-radius: 10px;
+  background-color: var(--buttons);
+  border: solid;
+  border-color: #a2d2ff;
+}
+.card {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
+  grid-gap: 2rem;
+  min-height: 51vh;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.card a {
+  text-decoration: none;
+  color: var(--text-primary);
+}
+.image {
+  height: 12rem;
+  width: 16rem;
+  border-radius: 10px;
+}
+
+.element:hover {
+  background-color: #a2d2ff;
+}

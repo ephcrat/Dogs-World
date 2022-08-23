@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTemperaments } from "../../actions";
 import { dynamicSelect } from "../../helpers";
 import axios from "axios";
+import Input from "../Input/Input";
 
 function CreateDog() {
   const emptyData = {
@@ -27,21 +28,13 @@ function CreateDog() {
     /^(http(s)?:\/\/)?(www.)?([a-zA-Z0-9])+([\-\.]{1}[a-zA-Z0-9]+)*\.[a-zA-Z]{2,5}(:[0-9]{1,5})?(\/[^\s]*)?$/gm; //https://stackoverflow.com/a/55468411/19504474
   const temperaments = useSelector((state) => state.temperaments);
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (temperaments.length === 0) {
-      dispatch(getTemperaments());
-    }
-  }, [dispatch, temperaments]);
+
+  if (temperaments.length === 0) {
+    dispatch(getTemperaments());
+  }
 
   function handleChange(e) {
     setData((prev) => {
-      // if (
-      //   (e.target.name.includes("weight") && isNaN(parseInt(e.target.value))) ||
-      //   (e.target.name.includes("height") && isNaN(parseInt(e.target.value))) ||
-      //   (e.target.name.includes("life") && isNaN(parseInt(e.target.value)))
-      // ) {
-      //   setError("Weight, Height and Life Span has to be a number");
-      // }
       if (e.target.value === "") setError(null);
       return { ...prev, [e.target.name]: e.target.value };
     });
@@ -77,25 +70,25 @@ function CreateDog() {
           "The name cannot contain numbers or special characters and must have a minimum length of 3 characters"
         );
       if (
-        isNaN(parseInt(data.min_weight)) ||
-        isNaN(parseInt(data.max_weight)) ||
-        parseInt(data.min_weight) > parseInt(data.max_weight)
+        isNaN(+data.min_weight) ||
+        isNaN(+data.max_weight) ||
+        +data.min_weight > +data.max_weight
       )
         return setError(
           "The minimum weight cannot be higher than the maximum weight and has to be a number"
         );
       if (
-        isNaN(parseInt(data.min_height)) ??
-        isNaN(parseInt(data.max_height)) ??
-        parseInt(data.min_height) > parseInt(data.max_height)
+        isNaN(+data.min_height) ??
+        isNaN(+data.max_height) ??
+        +data.min_height > +data.max_height
       )
         return setError(
           "The minimum height cannot be higher than the maximum height and has to be a number"
         );
       if (
-        isNaN(parseInt(data.min_life_span)) ??
-        isNaN(parseInt(data.max_life_span)) ??
-        parseInt(data.min_life_span) > parseInt(data.max_life_span)
+        isNaN(+data.min_life_span) ??
+        isNaN(+data.max_life_span) ??
+        +data.min_life_span > +data.max_life_span
       )
         return setError(
           "The minimum life_span cannot be higher than the maximum life_span and has to be a number"
@@ -126,77 +119,7 @@ function CreateDog() {
       >
         <div>
           <div>{error ? error : response}</div>
-          <label>Name</label>
-          <input
-            name={"name"}
-            placeholder="Name"
-            value={data.name}
-            required="required"
-            onChange={(e) => handleChange(e)}
-          />
-          <label>Minimum Weight</label>
-          <input
-            name={"min_weight"}
-            placeholder="Kilograms"
-            value={data.min_weight}
-            required="required"
-            onChange={(e) => handleChange(e)}
-          />
-          <label>Maximum Weight </label>
-          <input
-            name={"max_weight"}
-            placeholder="Kilograms"
-            value={data.max_weight}
-            required="required"
-            onChange={(e) => handleChange(e)}
-          />
-          <label>Minimum Height</label>
-          <input
-            name={"min_height"}
-            placeholder="Centimeters"
-            value={data.min_height}
-            required="required"
-            onChange={(e) => handleChange(e)}
-          />
-          <label>Maximum Height</label>
-          <input
-            name={"max_height"}
-            placeholder="Centimeters"
-            value={data.max_height}
-            required="required"
-            onChange={(e) => handleChange(e)}
-          />
-          <label>Minimum Life Span</label>
-          <input
-            name={"min_life_span"}
-            placeholder="Years"
-            value={data.min_life_span}
-            required="required"
-            onChange={(e) => handleChange(e)}
-          />
-          <label>Maximum Life Span</label>
-          <input
-            name={"max_life_span"}
-            placeholder="Years"
-            value={data.max_life_span}
-            required="required"
-            onChange={(e) => handleChange(e)}
-          />
-          <label>Image</label>
-          <input
-            name={"image"}
-            placeholder="URL"
-            value={data.image}
-            required="required"
-            onChange={(e) => handleChange(e)}
-          />
-          <label>Origin</label>
-          <input
-            name={"origin"}
-            placeholder="Country"
-            value={data.origin}
-            onChange={(e) => handleChange(e)}
-          />
+          <Input data={data} handleChange={handleChange} />
           <div>
             <select onChange={(e) => handleTemperaments(e)}>
               <option>Temperaments</option>

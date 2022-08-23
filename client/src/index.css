@@ -1,13 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700&display=swap");
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Barlow", sans-serif;
+  background: var(--background-gradient);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  --background-dark: #2b2a33;
+  --background: #f4f4f4;
+  /* --background-gradient: linear-gradient(
+    90deg,
+    hsla(211, 66%, 87%, 1) 0%,
+    hsla(348, 67%, 88%, 1) 50%,
+    hsla(272, 26%, 72%, 1) 100%
+  ); */
+  --background-gradient: linear-gradient(
+    90deg,
+    hsla(203, 76%, 85%, 1) 0%,
+    hsla(18, 69%, 84%, 1) 100%
+  );
+  /* --background-gradient: linear-gradient(
+    90deg,
+    hsla(208, 67%, 81%, 1) 0%,
+    hsla(37, 65%, 85%, 1) 50%,
+    hsla(301, 65%, 83%, 1) 100%
+  ); */
+
+  --text-primary: #1c1c1c;
+  --text-secondary: #f4f4f4;
+  --input-bg: #c8b5a6;
+  --navbar: #82d4c6;
+  /* --accent: #ffc8dd; */
+  --accent: #f6cfbe;
+  --buttons: #c9def4;
+  --input-text: #2b2a33;
+  --background-landing: var(--accent);
+}
+
+html,
+body {
+  overflow-x: hidden;
 }

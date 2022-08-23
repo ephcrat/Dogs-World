@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getDogs } from "../../actions";
+import styles from "./Search.module.css";
 
 function Search() {
   const [input, setInput] = useState("");
@@ -22,21 +23,22 @@ function Search() {
     setInput(e.target.value);
   }
   return (
-    <div>
-      Search
-      <div>
-        {error && <p>{error}</p>}
-        <form>
-          <input
-            value={input}
-            placeholder="Find a dog breed"
-            onChange={(e) => handleChange(e)}
-          />
-          <button type="submit" onClick={(e) => handleSubmit(e)}>
-            Find
-          </button>
-        </form>
-      </div>
+    <div className={styles.search}>
+      {error && <p>{error}</p>}
+      <form class={styles.form}>
+        <input
+          value={input}
+          placeholder="Find a dog breed"
+          onChange={(e) => handleChange(e)}
+        />
+        <button
+          className={styles.button}
+          type="submit"
+          onClick={(e) => handleSubmit(e)}
+        >
+          Find
+        </button>
+      </form>
     </div>
   );
 }

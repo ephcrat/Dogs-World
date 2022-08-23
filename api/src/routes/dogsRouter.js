@@ -46,12 +46,12 @@ router.post("/", async (req, res) => {
   try {
     let dog = await Dog.create({
       name,
-      min_height: parseInt(min_height),
-      max_height: parseInt(max_height),
-      min_weight: parseInt(min_weight),
-      max_weight: parseInt(max_weight),
-      min_life_span: parseInt(min_life_span),
-      max_life_span: parseInt(min_life_span),
+      min_height: +min_height,
+      max_height: +max_height,
+      min_weight: +min_weight,
+      max_weight: +max_weight,
+      min_life_span: +min_life_span,
+      max_life_span: +min_life_span,
       image,
       origin,
     });

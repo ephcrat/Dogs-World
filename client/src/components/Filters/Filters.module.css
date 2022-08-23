@@ -1,0 +1,10 @@
+.filters {
+  display: inline-flex;
+  padding-top: 2rem;
+}
+
+.select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

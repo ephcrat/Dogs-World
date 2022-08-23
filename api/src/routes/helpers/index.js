@@ -1,8 +1,8 @@
 const axios = require("axios");
 const { BASE_URL } = process.env;
 
-//place = api (default) or db. Formats the response object with the detailed data hence the dogs from the DB and the dogs from the API have the same attributes, and the values are in the same format.
 const formatDetailedDogs = function (array, place = "api") {
+  //place = "api" (default) or "db". Formats the response object with the detailed data hence the dogs from the db and the dogs from the api have the same attributes, and the values are in the same format.
   if (place !== "api") {
     return array.map(
       (dog) =>
@@ -22,9 +22,10 @@ const formatDetailedDogs = function (array, place = "api") {
     (dog) =>
       (dog = {
         id: dog.id,
-        name: dog.name.replace(/[^a-zA-Z ]/g, ""),
-        weight:
-          dog.weight.metric === "NaN" ? dog.weight.imperial : dog.weight.metric,
+        name: dog.name.replace(/[^a-zA-Z ]/g, ""), //get rid of the parentheses in some names
+        weight: !dog.weight.metric
+          ? dog.weight.imperial //If the metric weight is unavailabe (it appears as NaN in the response object) get the imperial weight
+          : dog.weight.metric,
         image: `https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`,
         height: dog.height.metric,
         life_span: dog.life_span,
@@ -51,11 +52,12 @@ const getDogs = async function (name) {
     const dogsDb = await Dog.findAll({
       where: { name: name },
       include: {
+        //query data from different models using include (eager loading) https://sequelize.org/docs/v6/advanced-association-concepts/eager-loading/#eager-loading-with-many-to-many-relationships
         //include the temperaments, get only the name.
         model: Temperament,
         attributes: ["name"],
         through: {
-          attributes: [],
+          attributes: [], //empty array because we don't want anything from the junction table
         },
       },
     });
@@ -81,7 +83,6 @@ const getDogs = async function (name) {
 
 const getDogsId = async function (name) {
   const dogs = await getDogs();
-  // const parseId = id.length < 20 ? parseInt(id) : id; //if it's not an UUID, convert it to an integer
   const dog = dogs.find((dog) => dog.name === name);
   if (!dog) throw new Error("id not found");
   return dog;

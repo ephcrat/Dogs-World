@@ -1,0 +1,4 @@
+.container {
+  background: var(--background-gradient);
+  margin-top: 2rem;
+}

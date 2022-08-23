@@ -28,6 +28,7 @@ function DogDetails() {
       DogDetails
       <ul>
         <li>{dogDetails?.name}</li>
+        <li>{dogDetails?.weight}</li>
       </ul>
     </div>
   );
