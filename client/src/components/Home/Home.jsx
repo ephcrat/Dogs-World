@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 import { getDogs, getTemperaments } from "../../actions";
 import { sortOrder, filterBySource, filterByTemp } from "../../helpers";
 import DogCard from "../DogCard/DogCard";
@@ -15,15 +16,21 @@ function Home() {
   // const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [dogsPerPage] = useState(8);
-
+  const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   const dogs = useSelector((state) => state.dogs);
   const temperaments = useSelector((state) => state.temperaments);
   const allDogs = dogs;
+  const query = searchParams.get("name");
 
-  if (dogs.length === 0 && temperaments.length === 0) {
+  if (dogs.length === 0 && temperaments.length === 0 && !query) {
     dispatch(getTemperaments());
     dispatch(getDogs());
+  }
+
+  if (dogs.length === 0 && temperaments.length === 0 && query) {
+    dispatch(getTemperaments());
+    dispatch(getDogs(query));
   }
 
   sortOrder(dogs, order);

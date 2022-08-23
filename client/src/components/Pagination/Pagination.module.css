@@ -13,17 +13,30 @@
 .button {
   --border-width: 0.1em;
   --animation-speed: 0.5s;
-  --color: #fff;
+  --color: #a2d2ff;
   width: 2.5rem;
+  height: 2rem;
   cursor: pointer;
-  border-width: 0.1rem;
+  border-width: 0.2rem;
   border-radius: 4px;
   border-color: transparent;
   background-color: #a2d2ff;
 }
 
-.button::before,
-.button::after {
+.buttonActive {
+  width: 2.5rem;
+  height: 2rem;
+  cursor: pointer;
+  border-width: 0.2rem;
+  border-radius: 4px;
+  border-color: #a2d2ff;
+  background-color: var(--accent);
+}
+.button:hover {
+  background-color: var(--accent);
+}
+
+.button::before {
   content: "";
   position: absolute;
   background: var(--color);
@@ -39,7 +52,6 @@
   animation: afterBorders var(--animation-speed) forwards ease-in-out;
 }
 
-.button:focus,
 .button:hover {
   animation: borderColors var(--animation-speed) steps(1) forwards;
   outline: none;

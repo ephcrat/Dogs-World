@@ -3,13 +3,13 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getDogs } from "../../actions";
 import styles from "./Search.module.css";
-
+import { useSearchParams } from "react-router-dom";
 function Search() {
   const [input, setInput] = useState("");
   const [error, setError] = useState(null);
   const regExLetters = /^[a-zA-Z\s]*$/;
   const dispatch = useDispatch();
-
+  const [searchParams, setSearchParams] = useSearchParams();
   function handleSubmit(e) {
     e.preventDefault();
     if (!regExLetters.test(e.target.value))
@@ -18,10 +18,12 @@ function Search() {
       );
     dispatch(getDogs(input));
     setError("");
+    setSearchParams("");
   }
   function handleChange(e) {
     setInput(e.target.value);
   }
+
   return (
     <div className={styles.search}>
       {error && <p>{error}</p>}

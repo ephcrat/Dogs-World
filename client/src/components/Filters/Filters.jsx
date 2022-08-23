@@ -24,21 +24,25 @@ function Filters({
 
   return (
     <div className={styles.filter}>
-      <div className={styles.select}>
-        <select onChange={(e) => handleOrder(e)}>
+      <div className={styles.orderSelect}>
+        <select
+          onChange={(e) => handleOrder(e)}
+          className={styles.orderLetters}
+        >
           <option defaultValue={""}>Order Alphabetically</option>
           <option value="a-z">Ascending: A-Z</option>
           <option value="z-a">Descending: Z-A</option>
         </select>
-      </div>
-      <div className={styles.select}>
-        <select onChange={(e) => handleOrder(e)}>
+        <select
+          onChange={(e) => handleOrder(e)}
+          className={styles.orderNumbers}
+        >
           <option defaultValue={""}>Order by Weight</option>
           <option value="0-9">Ascending: 0-9</option>
           <option value="9-0">Descending: 9-0</option>
         </select>
       </div>
-      <div className={styles.select}>
+      <div className={styles.filterSelect}>
         <select
           onChange={(e) => handleTemperaments(e)}
           className="select-temperament"
@@ -49,8 +53,6 @@ function Filters({
 
           {dynamicSelect(temperaments)}
         </select>
-      </div>
-      <div className={styles.select}>
         <select onChange={(e) => handleSource(e)}>
           <option value="All">All Dogs</option>
           <option value="number">API</option>

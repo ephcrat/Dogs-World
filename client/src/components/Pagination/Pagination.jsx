@@ -29,7 +29,9 @@ function Pagination({
           {numPages.map((number) => (
             <li key={number} className={styles.listItem}>
               <button
-                className={styles.button}
+                className={
+                  currentPage === number ? styles.buttonActive : styles.button
+                }
                 onClick={() => paginate(number)}
               >
                 {number}
