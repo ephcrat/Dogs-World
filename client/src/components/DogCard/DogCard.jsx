@@ -14,13 +14,9 @@ function renderDog(array, route) {
                 "-"
               )}`} //format the space separation to URI (%20) and replace it with a hypen https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
             >
-              <img
-                className={styles.image}
-                style={{ maxWidth: "300px", maxHeight: "300px" }}
-                src={dog.image}
-                alt={dog.name}
-              />
+              <img className={styles.image} src={dog.image} alt={dog.name} />
               <h2> {dog.name}</h2>
+              <p>{dog.temperament.join(" | ")}</p>
             </Link>
           </li>
         ))}

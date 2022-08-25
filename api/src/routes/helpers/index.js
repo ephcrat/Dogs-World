@@ -81,7 +81,13 @@ const getDogs = async function (name) {
   return allDogs;
 };
 
-const getDogsId = async function (name) {
+const getDogsId = async function (name, id) {
+  if (id) {
+    const dogs = await getDogs();
+    const dog = dogs.find((dog) => dog.id === id);
+    if (!dog) throw new Error("id not found");
+    return dog;
+  }
   const dogs = await getDogs();
   const dog = dogs.find((dog) => dog.name === name);
   if (!dog) throw new Error("id not found");
