@@ -5,6 +5,10 @@ import {
   CREATE_DOG,
   LOADING,
   GET_DOGS_BY_TEMP,
+  GET_USER,
+  GET_FAVORITES,
+  ADD_FAVORITE,
+  REMOVE_FAVORITES,
 } from "../actions";
 
 const initialState = {
@@ -23,6 +27,9 @@ const initialState = {
   dogs: [],
   temperaments: [],
   dogDetails: {},
+  user: [],
+  users: [],
+  favorites: [],
   isLoading: false,
 };
 
@@ -40,6 +47,26 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         dogs: state.dogs.filter((d) => d.temperament?.includes(payload)),
+      };
+    case GET_USER:
+      return {
+        ...state,
+        user: payload,
+      };
+    case GET_FAVORITES:
+      return {
+        ...state,
+        favorites: payload,
+      };
+    case ADD_FAVORITE:
+      return {
+        ...state,
+        favorites: state.favorites.concat(payload),
+      };
+    case REMOVE_FAVORITES:
+      return {
+        ...state,
+        favorites: state.favorites.filter((d) => d.name !== payload.name),
       };
     default:
       return state;

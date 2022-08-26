@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       favorites: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(4000),
         // set(value) {
         //   const fav = this.getDataValue("favorites");
         //   if (fav) {

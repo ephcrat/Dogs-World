@@ -1,8 +1,10 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import { getDogs, getTemperaments } from "../../actions";
+import ConnPool from "webtorrent/lib/conn-pool";
+import { getDogs, getFavorites, getTemperaments, getUser } from "../../actions";
 import { sortOrder, filterBySource, filterByTemp } from "../../helpers";
 import DogCard from "../DogCard/DogCard";
 import Filters from "../Filters/Filters";
@@ -20,8 +22,18 @@ function Home() {
   const dispatch = useDispatch();
   const dogs = useSelector((state) => state.dogs);
   const temperaments = useSelector((state) => state.temperaments);
+  const userReducer = useSelector((state) => state.user);
+  const favorites = useSelector((state) => state.favorites);
   const allDogs = dogs;
   const query = searchParams.get("name");
+  const { user } = useAuth0();
+
+  let userData = user
+    ? {
+        id: user?.sub,
+        name: user?.name,
+      }
+    : null;
 
   if (dogs.length === 0 && temperaments.length === 0 && !query) {
     dispatch(getTemperaments());
@@ -33,6 +45,16 @@ function Home() {
     dispatch(getDogs(query));
   }
 
+  if (userData && userReducer.length === 0) {
+    dispatch(getUser(userData));
+  }
+  console.log(userReducer);
+
+  if (allDogs && userReducer.favorites && favorites.length === 0) {
+    const payload = [userReducer, dogs];
+    dispatch(getFavorites(payload));
+  }
+  console.log(favorites);
   sortOrder(dogs, order);
 
   const dogsBySource = filterBySource(dogs, allDogs, source);

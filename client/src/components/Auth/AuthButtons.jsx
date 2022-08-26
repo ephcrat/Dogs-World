@@ -18,6 +18,10 @@ function AuthButtons() {
     const { logout } = useAuth0();
     return (
       <button
+        style={{
+          backgroundColor: "transparent",
+          borderColor: "transparent",
+        }}
         className="btn btn-danger btn-block"
         onClick={() =>
           logout({

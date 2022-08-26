@@ -5,11 +5,23 @@ import styles from "./Navbar.module.css";
 import logo from "./logo.png";
 import { useAuth0 } from "@auth0/auth0-react";
 import AuthButtons from "../Auth/AuthButtons";
-
+import { getUser } from "../../actions";
+import { useSelector, useDispatch } from "react-redux";
 function Navbar() {
   const { isLoading } = useAuth0();
   const { user } = useAuth0();
-  console.log(user);
+  const userReducer = useSelector((state) => state.user);
+  const favorites = useSelector((state) => state.favorites);
+  const dispatch = useDispatch();
+  let userData = user
+    ? {
+        id: user?.sub,
+        name: user?.name,
+      }
+    : null;
+
+  // if (!Object.keys(userReducer).length && userData) dispatch(getUser(userData));
+
   return (
     <header className={styles.navbar}>
       <img className={styles.logo} src={logo} alt="Dog's World logo" />
@@ -32,6 +44,13 @@ function Navbar() {
               Create Dog
             </NavLink>
           </li>
+          {Object.keys(userReducer).length && (
+            <li className={styles.listItem}>
+              <NavLink className={styles.listLink} to="/dogs/favorites">
+                Favorites
+              </NavLink>
+            </li>
+          )}
         </ul>
       </nav>
     </header>

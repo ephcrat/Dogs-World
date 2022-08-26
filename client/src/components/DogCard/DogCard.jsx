@@ -1,25 +1,40 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./DogCard.module.css";
-
-function renderDog(array, route) {
+import { useAuth0 } from "@auth0/auth0-react";
+import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import { addFavorite } from "../../actions";
+import FavButtons from "../Favorites/FavButtons";
+export function RenderDog(array, route) {
+  const favorites = useSelector((state) => state.favorites);
+  const dispatch = useDispatch();
+  const { user } = useAuth0();
   return (
     <>
       <ul className={styles.card}>
-        {array?.map((dog) => (
-          <li className={styles.element} key={dog.id}>
-            <Link
-              to={`/${route}/${encodeURIComponent(dog.name).replace(
-                /%20/g,
-                "-"
-              )}`} //format the space separation to URI (%20) and replace it with a hypen https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
-            >
-              <img className={styles.image} src={dog.image} alt={dog.name} />
-              <h2> {dog.name}</h2>
-              <p>{dog.temperament.join(" | ")}</p>
-            </Link>
-          </li>
-        ))}
+        {array?.map((dog) => {
+          // const isFaved = favorites?.find((d) => d?.id === dog?.id);
+          return (
+            <li className={styles.element} key={dog?.id}>
+              <Link
+                to={`/${route}/${encodeURIComponent(dog?.name).replace(
+                  /%20/g,
+                  "-"
+                )}`} //format the space separation to URI (%20) and replace it with a hypen https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
+              >
+                <img
+                  className={styles.image}
+                  src={dog?.image}
+                  alt={dog?.name}
+                />
+                <h2> {dog?.name}</h2>
+                <p>{dog?.temperament?.join(" | ")}</p>
+              </Link>
+              {user && <FavButtons dog={dog} favorites={favorites} />}
+            </li> //if an user is logged in, show the fav button. else hide it
+          );
+        })}
       </ul>
     </>
   );
@@ -31,11 +46,7 @@ function currentDog(arr, indexFirst = 0, indexLast = 8) {
 
 function DogCard({ arr, indexOfFirstDog, indexOfLastDog }) {
   return (
-    <>
-      <ul>
-        {renderDog(currentDog(arr, indexOfFirstDog, indexOfLastDog), "dogs")}
-      </ul>
-    </>
+    <>{RenderDog(currentDog(arr, indexOfFirstDog, indexOfLastDog), "dogs")}</>
   );
 }
 
