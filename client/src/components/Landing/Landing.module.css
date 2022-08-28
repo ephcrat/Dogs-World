@@ -1,0 +1,95 @@
+.wrapper {
+  min-height: 100%;
+  min-width: 100%;
+  background: var(--background-gradient);
+  color: var(--text-primary);
+}
+
+.img1Wrapper {
+}
+.img1 {
+  width: 50vh;
+  height: 50vh;
+  margin-left: 20rem;
+  position: fixed;
+  bottom: 0;
+}
+
+.img3Wrapper {
+}
+.img3 {
+  width: 30vh;
+  height: 60vh;
+  margin-top: 32vh;
+  position: fixed;
+  bottom: 0;
+}
+
+.button {
+  --border-width: 0.1em;
+  --animation-speed: 0.5s;
+  --color: var(--background);
+  background-color: var(--buttons);
+  color: var(--text-primary);
+  border: solid;
+  border-color: transparent;
+  border-radius: 9999px;
+  height: 2.5rem;
+  width: 7rem;
+  cursor: pointer;
+  margin-left: 35rem;
+  margin-top: 7.5rem;
+}
+
+.button:hover {
+  background-color: var(--accent);
+}
+.button::before,
+.button::after {
+  content: "";
+  position: absolute;
+  background: var(--color);
+}
+
+.button:focus::before,
+.button:hover::before {
+  animation: beforeBorders var(--animation-speed) forwards ease-in-out;
+}
+
+.button:focus::after,
+.button:hover::after {
+  animation: afterBorders var(--animation-speed) forwards ease-in-out;
+}
+
+.button:focus,
+.button:hover {
+  animation: borderColors var(--animation-speed) steps(1) forwards;
+  outline: none;
+}
+
+@keyframes borderColors {
+  0% {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+  33% {
+    border-top-color: var(--color);
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+  66% {
+    border-top-color: var(--color);
+    border-right-color: var(--color);
+    border-bottom-color: transparent;
+    border-left-color: var(--color);
+  }
+  100% {
+    border-top-color: var(--color);
+    border-right-color: var(--color);
+    border-bottom-color: var(--color);
+    border-left-color: var(--color);
+  }
+}

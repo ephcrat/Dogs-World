@@ -1,0 +1,138 @@
+.navbar {
+  height: 3.5rem;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: var(--buttons);
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.list {
+  max-height: 3.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-flow: row;
+  position: absolute;
+  right: 0;
+  gap: 2rem;
+  margin-right: 2rem;
+}
+.listItem,
+.button {
+  --border-width: 0.1em;
+  --animation-speed: 0.5s;
+  --color: var(--accent);
+  max-height: 1.5rem;
+  min-width: 5rem;
+  text-align: center;
+  border: solid 2px;
+  border-color: transparent;
+  border-radius: 9999px;
+}
+
+.listLink {
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 300;
+}
+.listItem:hover {
+  background-color: #a2d2ff;
+  border-color: var(--input-bg);
+}
+
+.search {
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  box-sizing: border-box;
+  padding-right: 45rem;
+}
+
+.logo {
+  margin-top: 0.5rem;
+  width: 12rem;
+  height: 10rem;
+  position: relative;
+}
+
+.button {
+  --border-width: 0.1em;
+  --animation-speed: 0.5s;
+  --color: #a2d2ff;
+  margin: 0;
+  text-align: right;
+  text-indent: 13%;
+  cursor: pointer;
+  background-color: #a2d2ff;
+}
+
+.button:hover {
+  background-color: var(--accent);
+}
+
+.listItem::before,
+.listItem::after,
+.button::before,
+.button::after {
+  content: "";
+  position: absolute;
+  background: var(--color);
+}
+
+.listItem:focus::before,
+.listItem:hover::before,
+.button:focus::before,
+.button:hover::before {
+  animation: var(--animation-speed) forwards ease-in-out;
+}
+
+.listItem:focus::after,
+.listItem:hover::after,
+.button:focus::after,
+.button:hover::after {
+  animation: var(--animation-speed) forwards ease-in-out;
+}
+
+.listItem:focus,
+.listItem:hover,
+.button:focus,
+.button:hover {
+  animation: borderColors var(--animation-speed) steps(1) forwards;
+  outline: none;
+}
+
+@keyframes borderColors {
+  0% {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+  33% {
+    border-top-color: var(--color);
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+  66% {
+    border-top-color: var(--color);
+    border-right-color: var(--color);
+    border-bottom-color: transparent;
+    border-left-color: var(--color);
+  }
+  100% {
+    border-top-color: var(--color);
+    border-right-color: var(--color);
+    border-bottom-color: var(--color);
+    border-left-color: var(--color);
+  }
+}

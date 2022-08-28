@@ -1,0 +1,10 @@
+.details {
+  list-style: none;
+  display: inline-flex;
+}
+
+.image {
+  width: 30rem;
+  height: 25rem;
+  border-radius: 10px;
+}
