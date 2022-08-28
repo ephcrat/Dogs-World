@@ -61,12 +61,12 @@ export default function rootReducer(state = initialState, { type, payload }) {
     case ADD_FAVORITE:
       return {
         ...state,
-        favorites: state.favorites.concat(payload),
+        favorites: state?.favorites.concat(payload),
       };
     case REMOVE_FAVORITES:
       return {
         ...state,
-        favorites: state.favorites.filter((d) => d.name !== payload.name),
+        favorites: state.favorites.filter((d) => d?.name !== payload.name),
       };
     default:
       return state;

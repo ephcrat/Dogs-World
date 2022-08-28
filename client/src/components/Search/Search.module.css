@@ -2,12 +2,8 @@
   padding-top: 1rem;
   box-sizing: border-box;
   box-shadow: 0 0.125rem 0.3125rem rgba(black, 0.3);
-  display: flex;
-  margin: 0 auto;
   font-size: 1rem;
   padding-bottom: 3rem;
-  position: relative;
-  padding-right: 5rem;
 }
 
 .search input {

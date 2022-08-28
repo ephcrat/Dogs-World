@@ -2,6 +2,8 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useSelector, useDispatch } from "react-redux";
 import { addFavorite, removeFavorite } from "../../actions";
+import { FcLikePlaceholder, FcLike } from "react-icons/fc";
+import styles from "./Favorites.module.css";
 function FavButtons({ dog, favorites }) {
   const dispatch = useDispatch();
   const { user } = useAuth0();
@@ -14,9 +16,13 @@ function FavButtons({ dog, favorites }) {
   }
 
   return isFaved ? (
-    <button onClick={(e) => handleRemove(e)}>Faved</button>
+    <button className={styles.button} onClick={(e) => handleRemove(e)}>
+      <FcLike />
+    </button>
   ) : (
-    <button onClick={(e) => handleAdd(e)}>Fav</button>
+    <button className={styles.button} onClick={(e) => handleAdd(e)}>
+      <FcLikePlaceholder />
+    </button>
   );
 }
 

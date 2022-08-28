@@ -6,17 +6,21 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { addFavorite } from "../../actions";
 import FavButtons from "../Favorites/FavButtons";
+import { stubFalse } from "lodash";
+
 export function RenderDog(array, route) {
   const favorites = useSelector((state) => state.favorites);
   const dispatch = useDispatch();
   const { user } = useAuth0();
   return (
-    <>
-      <ul className={styles.card}>
-        {array?.map((dog) => {
-          // const isFaved = favorites?.find((d) => d?.id === dog?.id);
-          return (
+    <ul className={styles.card}>
+      {array?.map((dog) => {
+        // const isFaved = favorites?.find((d) => d?.id === dog?.id);
+        return (
+          <div className={styles.container}>
             <li className={styles.element} key={dog?.id}>
+              {user && <FavButtons dog={dog} favorites={favorites} />}
+
               <Link
                 to={`/${route}/${encodeURIComponent(dog?.name).replace(
                   /%20/g,
@@ -28,15 +32,25 @@ export function RenderDog(array, route) {
                   src={dog?.image}
                   alt={dog?.name}
                 />
-                <h2> {dog?.name}</h2>
-                <p>{dog?.temperament?.join(" | ")}</p>
+                <h2 className={styles.name}>{dog?.name}</h2>
+                <p className={styles.weight}>{dog?.weight} Kg</p>
+                <h3
+                  style={{
+                    fontWeight: 600,
+                    fontSize: "0.85rem",
+                  }}
+                >
+                  Temperaments:
+                </h3>
+                <p className={styles.temperament}>
+                  {dog?.temperament?.join(" | ")}
+                </p>
               </Link>
-              {user && <FavButtons dog={dog} favorites={favorites} />}
-            </li> //if an user is logged in, show the fav button. else hide it
-          );
-        })}
-      </ul>
-    </>
+            </li>
+          </div> //if an user is logged in, show the fav button. else hide it
+        );
+      })}
+    </ul>
   );
 }
 function currentDog(arr, indexFirst = 0, indexLast = 8) {

@@ -68,8 +68,7 @@ function Home() {
 
   return (
     <div className={styles.container}>
-      {/* <Search /> */}
-
+      <h1 className={styles.title}>Explore Dog's World</h1>
       <Filters
         temperaments={temperaments}
         setCurrentPage={setCurrentPage}
@@ -92,13 +91,17 @@ function Home() {
           />
         )}
       </div>
-      <Pagination
-        dogsPerPage={dogsPerPage}
-        allDogsLength={temp !== "All" ? dogsByTemp.length : dogsBySource.length}
-        paginate={paginate}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+      <div className={styles.pages}>
+        <Pagination
+          dogsPerPage={dogsPerPage}
+          allDogsLength={
+            temp !== "All" ? dogsByTemp.length : dogsBySource.length
+          }
+          paginate={paginate}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      </div>
     </div>
   );
 }

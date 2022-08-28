@@ -23,8 +23,8 @@ function Filters({
   }
 
   return (
-    <div className={styles.filter}>
-      <div className={styles.orderSelect}>
+    <div>
+      <div className={styles.filters}>
         <select
           onChange={(e) => handleOrder(e)}
           className={styles.orderLetters}
@@ -41,11 +41,10 @@ function Filters({
           <option value="0-9">Ascending: 0-9</option>
           <option value="9-0">Descending: 9-0</option>
         </select>
-      </div>
-      <div className={styles.filterSelect}>
+
         <select
           onChange={(e) => handleTemperaments(e)}
-          className="select-temperament"
+          className={styles.filterTemp}
         >
           <option value={"All"} key={0}>
             All Temperaments
@@ -53,7 +52,10 @@ function Filters({
 
           {dynamicSelect(temperaments)}
         </select>
-        <select onChange={(e) => handleSource(e)}>
+        <select
+          className={styles.filterSource}
+          onChange={(e) => handleSource(e)}
+        >
           <option value="All">All Dogs</option>
           <option value="number">API</option>
           <option value="string">Database</option>

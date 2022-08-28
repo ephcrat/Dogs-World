@@ -96,7 +96,7 @@ export function getFavorites(payload) {
         const findDog = allDogs.find((dog) => d === dog.name);
         arr.push(findDog);
       });
-      dispatch({
+      await dispatch({
         type: GET_FAVORITES,
         payload: arr,
       });

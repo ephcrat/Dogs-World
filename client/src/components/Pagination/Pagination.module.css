@@ -3,10 +3,12 @@
   margin-top: 1rem;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 .list {
+  display: flex;
+  flex-direction: row;
   list-style: none;
-  display: inline-flex;
   gap: 0.5rem;
 }
 

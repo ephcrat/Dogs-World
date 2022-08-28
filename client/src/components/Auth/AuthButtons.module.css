@@ -1,0 +1,11 @@
+.button {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  border-color: transparent;
+  margin-right: 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 300;
+  cursor: pointer;
+}

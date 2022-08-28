@@ -23,20 +23,19 @@ function Navbar() {
   // if (!Object.keys(userReducer).length && userData) dispatch(getUser(userData));
 
   return (
-    <header className={styles.navbar}>
-      <img className={styles.logo} src={logo} alt="Dog's World logo" />
-      <Search />
-      <nav>
+    <header>
+      <nav className={styles.navbar}>
+        <div className={styles.logoWrapper}>
+          <img className={styles.logo} src={logo} alt="Dog's World logo" />
+        </div>
+        <div className={styles.search}>
+          <Search />
+        </div>
+
         <ul className={styles.list}>
-          <li className={styles.listItem}>{!isLoading && <AuthButtons />}</li>
           <li className={styles.listItem}>
             <NavLink className={styles.listLink} to="/dogs/">
               Home
-            </NavLink>
-          </li>
-          <li className={styles.listItem}>
-            <NavLink className={styles.listLink} to="/dogs">
-              About
             </NavLink>
           </li>
           <li className={styles.listItem}>
@@ -51,6 +50,7 @@ function Navbar() {
               </NavLink>
             </li>
           )}
+          <li className={styles.button}>{!isLoading && <AuthButtons />}</li>
         </ul>
       </nav>
     </header>

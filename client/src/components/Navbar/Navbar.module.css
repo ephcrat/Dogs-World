@@ -10,9 +10,7 @@
   align-items: center;
   padding: 0 20px;
   box-sizing: border-box;
-}
-.navbar nav {
-  height: 100%;
+  font-size: 1rem;
 }
 
 .list {
@@ -22,15 +20,13 @@
   list-style: none;
   display: flex;
   flex-flow: row;
-  align-items: right;
   position: absolute;
   right: 0;
-  height: 100%;
   gap: 2rem;
   margin-right: 2rem;
-  margin-top: 1rem;
 }
-.listItem {
+.listItem,
+.button {
   --border-width: 0.1em;
   --animation-speed: 0.5s;
   --color: var(--accent);
@@ -54,42 +50,62 @@
 
 .search {
   margin: 0 auto;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   font-size: 1rem;
-  position: relative;
   box-sizing: border-box;
+  padding-right: 45rem;
 }
 
 .logo {
-  margin-top: 0.3rem;
-  margin-right: 2rem;
+  margin-top: 0.5rem;
   width: 12rem;
   height: 10rem;
-  position: absolute;
-  left: 0;
+  position: relative;
+}
+
+.button {
+  --border-width: 0.1em;
+  --animation-speed: 0.5s;
+  --color: #a2d2ff;
+  margin: 0;
+  text-align: right;
+  text-indent: 13%;
+  cursor: pointer;
+  background-color: #a2d2ff;
+}
+
+.button:hover {
+  background-color: var(--accent);
 }
 
 .listItem::before,
-.listItem::after {
+.listItem::after,
+.button::before,
+.button::after {
   content: "";
   position: absolute;
   background: var(--color);
 }
 
 .listItem:focus::before,
-.listItem:hover::before {
+.listItem:hover::before,
+.button:focus::before,
+.button:hover::before {
   animation: var(--animation-speed) forwards ease-in-out;
 }
 
 .listItem:focus::after,
-.listItem:hover::after {
+.listItem:hover::after,
+.button:focus::after,
+.button:hover::after {
   animation: var(--animation-speed) forwards ease-in-out;
 }
 
 .listItem:focus,
-.listItem:hover {
+.listItem:hover,
+.button:focus,
+.button:hover {
   animation: borderColors var(--animation-speed) steps(1) forwards;
   outline: none;
 }

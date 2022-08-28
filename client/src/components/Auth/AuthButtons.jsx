@@ -1,14 +1,12 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import styles from "./AuthButtons.module.css";
 
 function AuthButtons() {
   const LoginButton = () => {
     const { loginWithRedirect } = useAuth0();
     return (
-      <button
-        className="btn btn-primary btn-block"
-        onClick={() => loginWithRedirect()}
-      >
+      <button className={styles.button} onClick={() => loginWithRedirect()}>
         Log In
       </button>
     );
@@ -18,11 +16,7 @@ function AuthButtons() {
     const { logout } = useAuth0();
     return (
       <button
-        style={{
-          backgroundColor: "transparent",
-          borderColor: "transparent",
-        }}
-        className="btn btn-danger btn-block"
+        className={styles.button}
         onClick={() =>
           logout({
             returnTo: window.location.origin,

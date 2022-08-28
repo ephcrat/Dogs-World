@@ -61,7 +61,7 @@ function CreateDog() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (error) throw new Error(error);
+    setError(null);
     try {
       if (!data.temperament.length)
         return setError("At least 1 temperament is required");
@@ -100,12 +100,13 @@ function CreateDog() {
         );
       if (!regExURL.test(data.image))
         return setError("The image has to be a URL");
-      setError(null);
-      const post = await axios.post("/dogs", data);
-      setResponse(post.data);
-      setData(emptyData);
+      if (!error) {
+        const post = await axios.post("/dogs", data);
+        setResponse(post.data);
+        setData(emptyData);
+      }
     } catch (err) {
-      setError(err.message);
+      console.error(err.message);
     }
   }
 

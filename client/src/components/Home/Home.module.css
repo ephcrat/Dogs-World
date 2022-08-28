@@ -2,3 +2,18 @@
   background: var(--background-gradient);
   margin-top: 2rem;
 }
+
+.grid {
+  margin-top: 2.5rem;
+}
+
+.title {
+  text-align: center;
+  color: var(--third);
+}
+
+@media only screen and (max-width: 429px) {
+  .grid {
+    margin-right: 2.5rem;
+  }
+}
