@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addFavorite, removeFavorite } from "../../actions";
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import styles from "./Favorites.module.css";

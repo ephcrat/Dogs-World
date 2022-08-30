@@ -36,6 +36,7 @@
   border: solid 2px;
   border-color: transparent;
   border-radius: 9999px;
+  padding: 0.2rem;
 }
 
 .listLink {

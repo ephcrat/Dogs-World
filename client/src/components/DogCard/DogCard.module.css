@@ -1,11 +1,13 @@
 .element {
-  height: 22rem;
+  height: 21rem;
   width: 16rem;
   border-radius: 10px;
   background-color: var(--primary);
   border: solid;
   border-color: var(--secondary);
-  line-height: 1rem;
+  line-height: 0.95rem;
+  /* transition: 0.5s; */
+  padding-bottom: 0.5rem;
 }
 
 .card {
@@ -31,6 +33,9 @@
 
 .element:hover {
   background-color: var(--secondary);
+  box-shadow: 0 0 10px rgba(28, 28, 28, 0.902);
+  transition: 0.5s;
+  border-color: transparent;
 }
 
 .temperament {

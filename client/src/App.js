@@ -6,7 +6,12 @@ import DogDetails from "./components/DogDetails/DogDetails";
 import Landing from "./components/Landing/Landing";
 import Favorites from "./components/Favorites/Favorites";
 import Empty from "./components/Empty/Empty";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+
+} from "react-router-dom";
 import Auth0ProviderWithHistory from "./components/Auth/Auth0ProviderWithHistory";
 
 function App() {

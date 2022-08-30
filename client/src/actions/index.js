@@ -10,11 +10,13 @@ export const GET_USER = "GET USER";
 export const GET_FAVORITES = "GET FAVORITES";
 export const ADD_FAVORITE = "ADD FAVORITE";
 export const REMOVE_FAVORITES = "REMOVE FAVORITES";
+export const SET_CURRENT_PAGE = "SET CURRENT PAGE";
 export function getDogs(name) {
   return async function (dispatch) {
     try {
       const response = await axios.get(`/dogs${name ? `?name=${name}` : `/`}`);
       dispatch({ type: GET_DOGS, payload: response.data });
+      dispatch({ type: SET_CURRENT_PAGE, payload: 1 });
     } catch (err) {
       console.error(err.message);
     }
@@ -136,5 +138,14 @@ export function removeFavorite(payload) {
     } catch (err) {
       console.error(err.message);
     }
+  };
+}
+
+export function setCurrentPage(payload) {
+  return async function (dispatch) {
+    dispatch({
+      type: SET_CURRENT_PAGE,
+      payload: payload,
+    });
   };
 }

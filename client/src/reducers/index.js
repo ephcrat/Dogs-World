@@ -9,6 +9,7 @@ import {
   GET_FAVORITES,
   ADD_FAVORITE,
   REMOVE_FAVORITES,
+  SET_CURRENT_PAGE,
 } from "../actions";
 
 const initialState = {
@@ -31,6 +32,8 @@ const initialState = {
   users: [],
   favorites: [],
   isLoading: false,
+  currentPage: 1,
+  dogsPerPage: 8,
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -67,6 +70,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         favorites: state.favorites.filter((d) => d?.name !== payload.name),
+      };
+    case SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: payload,
       };
     default:
       return state;

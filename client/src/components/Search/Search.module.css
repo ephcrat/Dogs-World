@@ -26,14 +26,16 @@
   font-weight: 600;
 }
 .search input,
-.button {
+.button,
+.buttonRefresh {
   font: inherit;
   border: 0;
   outline: 0;
   box-sizing: border-box;
 }
 
-.button {
+.button,
+.buttonRefresh {
   background-color: var(--buttons);
   height: 1.5rem;
   width: 4rem;
@@ -46,8 +48,9 @@
   border-radius: 9999px;
 }
 
-/* .search button {
-  position: absolute;
-  box-sizing: border-box;
-  margin-left: 20rem;
-} */
+.buttonRefresh {
+  color: var(--third);
+  font-weight: 700;
+  margin-left: 16rem;
+  font-size: 1.6rem;
+}

@@ -1,11 +1,12 @@
-import { nameprep } from "ethers/lib/utils";
 import React from "react";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getDogDetails, GET_DOG_DETAILS } from "../../actions";
 import styles from "./DogDetails.module.css";
+import Empty from "../Empty/Empty";
+import { IoArrowBackCircleSharp } from "react-icons/io5";
 
 function DogDetails() {
   let { name } = useParams();
@@ -16,6 +17,7 @@ function DogDetails() {
     .join(" ");
   const dispatch = useDispatch();
   const dogDetails = useSelector((state) => state.dogDetails);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (name) {
@@ -26,23 +28,51 @@ function DogDetails() {
     };
   }, [dispatch, nameFormated, name]);
 
+  const handleClick = function () {
+    navigate(-1, { replace: true });
+  };
+
   return (
     <div className={styles.container}>
-      DogDetails
-      <ul className={styles.details}>
-        <li>
-          {" "}
-          <img
-            className={styles.image}
-            src={dogDetails?.image}
-            alt={dogDetails?.name}
-          />
-        </li>
-        <li className={styles.name}>
+      <div className={styles.goBack}>
+        {" "}
+        <button
+          styles={{ cursor: "pointer", paddingTop: "rem" }}
+          onClick={() => handleClick()}
+        >
+          <IoArrowBackCircleSharp />
+        </button>
+      </div>
+      <div className={styles.image}>
+        <img src={dogDetails?.image} alt={dogDetails?.name} />
+      </div>
+      <div className={styles.detailsDiv}>
+        <div className={styles.name}>
           <h1>{dogDetails?.name}</h1>
-        </li>
-        <li>{dogDetails?.weight}</li>
-      </ul>
+        </div>
+        {/* <br /> */}
+        <ul className={styles.details}>
+          <li className={styles.weight}>
+            <label>Weight (Kg):</label> <br /> <p>{dogDetails?.weight}</p>
+          </li>
+          <li className={styles.height}>
+            <label>Height (cm):</label> <br /> <p>{dogDetails?.height}</p>
+          </li>
+          <li className={styles.lifespan}>
+            <label>Lifespan:</label> <br /> <p>{dogDetails?.life_span}</p>
+          </li>
+        </ul>
+        <h2
+          style={{ textAlign: "center", fontSize: "1.2rem", marginTop: "2rem" }}
+        >
+          Temperaments:
+        </h2>
+        <div className={styles.temperament}>
+          {dogDetails.temperament?.map((t) => (
+            <p>{t}</p>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

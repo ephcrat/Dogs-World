@@ -1,26 +1,24 @@
 import React from "react";
-import { dynamicSelect } from "../../helpers";
+
+import { DynamicSelect } from "../../helpers";
 import styles from "./Filters.module.css";
 
-function Filters({
-  temperaments,
-  setCurrentPage,
-  setOrder,
-  setSource,
-  setTemp,
-}) {
+function Filters({ temperaments, setOrder, setSource, setTemp, temp }) {
+
+
   function handleSource(e) {
     setSource(e.target.value);
   }
 
   const handleTemperaments = function (e) {
     setTemp(e.target.value);
-    setCurrentPage(1);
   };
 
   function handleOrder(e) {
     setOrder(e.target.value);
   }
+
+  
 
   return (
     <div>
@@ -43,14 +41,16 @@ function Filters({
         </select>
 
         <select
-          onChange={(e) => handleTemperaments(e)}
+          onChange={(e) => {
+            handleTemperaments(e);
+          }}
           className={styles.filterTemp}
         >
           <option value={"All"} key={0}>
             All Temperaments
           </option>
 
-          {dynamicSelect(temperaments)}
+          {DynamicSelect(temperaments)}
         </select>
         <select
           className={styles.filterSource}

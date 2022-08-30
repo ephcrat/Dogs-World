@@ -5,17 +5,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./store";
+import axios from "axios";
 
+axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
 const root = createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
- 
-      <Provider store={store}>
-        <App />
-      </Provider>
-  
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
