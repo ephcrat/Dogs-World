@@ -1,21 +1,22 @@
 import React from "react";
-import { useEffect } from "react";
+
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTemperaments } from "../../actions";
-import { dynamicSelect } from "../../helpers";
+
 import axios from "axios";
 import Input from "../Input/Input";
+import styles from "./CreateDog.module.css";
 
 function CreateDog() {
   const emptyData = {
     name: "",
-    min_weight: "",
-    max_weight: "",
-    min_height: "",
-    max_height: "",
-    min_life_span: "",
-    max_life_span: "",
+    min_weight: 1,
+    max_weight: 120,
+    min_height: 1,
+    max_height: 300,
+    min_life_span: 1,
+    max_life_span: 20,
     origin: "",
     image: "",
     temperament: [],
@@ -46,6 +47,13 @@ function CreateDog() {
         return {
           ...prev,
           temperament: [...data.temperament, e.target.value],
+        };
+      });
+    } else {
+      setData((prev) => {
+        return {
+          ...prev,
+          temperament: data.temperament.filter((t) => t !== e.target.value),
         };
       });
     }
@@ -102,8 +110,9 @@ function CreateDog() {
         return setError("The image has to be a URL");
       if (!error) {
         const post = await axios.post("/dogs", data);
+
         setResponse(post.data);
-        setData(emptyData);
+        setData({ ...emptyData, temperament: data.temperament });
       }
     } catch (err) {
       console.error(err.message);
@@ -111,35 +120,22 @@ function CreateDog() {
   }
 
   return (
-    <div>
-      <h1>Create Dog</h1>
+    <div className={styles.pageContainer}>
+      <h1 style={{ textAlign: "center" }}>Create a Breed</h1>
       <form
         onSubmit={(e) => {
           handleSubmit(e);
         }}
       >
-        <div>
-          <div>{error ? error : response}</div>
-          <Input data={data} handleChange={handleChange} />
-          <div>
-            <select onChange={(e) => handleTemperaments(e)}>
-              <option>Temperaments</option>
-              {dynamicSelect(temperaments)}
-            </select>
-          </div>
-          <div>
-            {data.temperament?.map((t) => {
-              return (
-                <div key={t}>
-                  <p>{t}</p>
-                  <button value={t} onClick={(e) => handleDelete(e)}>
-                    x
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-          <button type="submit">Create Dog</button>
+        <div className={styles.formContainer}>
+          <Input
+            data={data}
+            handleChange={handleChange}
+            handleTemperaments={handleTemperaments}
+            handleDelete={handleDelete}
+            error={error}
+            response={response}
+          />
         </div>
       </form>
     </div>

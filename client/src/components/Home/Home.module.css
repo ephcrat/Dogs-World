@@ -10,6 +10,8 @@
 .title {
   text-align: center;
   color: var(--third);
+  animation: 2s;
+  animation-direction: normal;
 }
 
 @media only screen and (max-width: 429px) {

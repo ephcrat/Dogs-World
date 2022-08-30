@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
 
 const Auth0ProviderWithHistory = ({ children }) => {
-  const domain = "dev-zlz02sv5.us.auth0.com";
-  const clientId = "x0bHFm7kSiDDsyVDD8L90h637KdsJPuL";
-  const audience = "https://dev-zlz02sv5.us.auth0.com/api/v2/";
+  const domain = process.env.REACT_APP_AUTH0_DOMAIN;
+  const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
+  const audience = process.env.REACT_APP_AUDIENCE;
   const navigate = useNavigate();
 
   const onRedirectCallback = () => {
