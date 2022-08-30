@@ -46,20 +46,23 @@ router.post("/", async (req, res) => {
   try {
     let dog = await Dog.create({
       name,
-      min_height,
-      max_height,
-      min_weight,
-      max_weight,
-      min_life_span,
-      max_life_span,
+      min_height: +min_height,
+      max_height: +max_height,
+      min_weight: +min_weight,
+      max_weight: +max_weight,
+      min_life_span: +min_life_span,
+      max_life_span: +min_life_span,
       image,
       origin,
     });
 
-    let findTemperament = await Temperament.findAll({
-      where: { name: temperament },
+    temperament.map(async (t) => {
+      let findTemperament = await Temperament.findAll({
+        where: { name: t },
+      });
+      dog.addTemperament(findTemperament);
     });
-    dog.addTemperament(findTemperament);
+
     res.json(`${name} was created succesfully!`);
   } catch (err) {
     console.error(err);
@@ -67,10 +70,10 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
-  const { id } = req.params;
+router.get("/:name", async (req, res) => {
+  const { name } = req.params; //All dog names from the API and DB are unique. In this case I'm using the name as the identifier instead of the id to improve SEO.
   try {
-    const dog = await getDogsId(id);
+    const dog = await getDogsId(name);
     res.json(dog);
   } catch (err) {
     console.error(err);

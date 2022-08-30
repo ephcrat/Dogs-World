@@ -1,0 +1,59 @@
+.element {
+  height: 21rem;
+  width: 16rem;
+  border-radius: 10px;
+  background-color: var(--primary);
+  border: solid;
+  border-color: var(--secondary);
+  line-height: 0.95rem;
+  /* transition: 0.5s; */
+  padding-bottom: 0.5rem;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
+  grid-gap: 2rem;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card a {
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.image {
+  height: 12rem;
+  width: 16rem;
+  border-radius: 10px;
+}
+
+.element:hover {
+  background-color: var(--secondary);
+  box-shadow: 0 0 10px rgba(28, 28, 28, 0.902);
+  transition: 0.5s;
+  border-color: transparent;
+}
+
+.temperament {
+  display: contents;
+  font-size: 0.85rem;
+}
+
+.name {
+  font-size: 0.95rem;
+  line-height: 0.6rem;
+}
+
+.weight {
+  line-height: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--third);
+}
+.weight:hover {
+  color: var(--accent);
+}
