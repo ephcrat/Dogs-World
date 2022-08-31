@@ -85,16 +85,16 @@ function CreateDog() {
           "The minimum weight cannot be higher than the maximum weight and has to be a number"
         );
       if (
-        isNaN(+data.min_height) ??
-        isNaN(+data.max_height) ??
+        isNaN(+data.min_height) ||
+        isNaN(+data.max_height) ||
         +data.min_height > +data.max_height
       )
         return setError(
           "The minimum height cannot be higher than the maximum height and has to be a number"
         );
       if (
-        isNaN(+data.min_life_span) ??
-        isNaN(+data.max_life_span) ??
+        isNaN(+data.min_life_span) ||
+        isNaN(+data.max_life_span) ||
         +data.min_life_span > +data.max_life_span
       )
         return setError(
