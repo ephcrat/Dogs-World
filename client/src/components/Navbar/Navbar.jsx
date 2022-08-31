@@ -17,14 +17,20 @@ function Navbar() {
     <header>
       <nav className={styles.navbar}>
         <div className={styles.logoWrapper}>
-          <img className={styles.logo} src={logo} alt="Dog's World logo" />
+          <NavLink to="/dogs/">
+            <img className={styles.logo} src={logo} alt="Dog's World logo" />
+          </NavLink>
         </div>
         <div className={styles.search}>
           <Search />
         </div>
         <ul className={styles.list}>
           <li className={styles.listItem}>
-            <NavLink className={styles.listLink} to="/dogs/">
+            <NavLink
+              onClick={() => dispatch(getDogs())}
+              className={styles.listLink}
+              to="/dogs/"
+            >
               Home
             </NavLink>
           </li>

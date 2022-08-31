@@ -4,12 +4,17 @@ import styles from "./Empty.module.css";
 
 import { useDispatch } from "react-redux";
 import { resetFilters } from "../../helpers";
-function Empty({ reset, setOrder, setTemp, setSource}) {
+import { getDogs } from "../../actions";
+function Empty({ reset, setOrder, setTemp, setSource }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleClick = function () {
-    reset ? resetFilters(setOrder, setTemp, setSource) : navigate(-1, { replace: true });
+    reset
+      ? resetFilters(setOrder, setTemp, setSource) && dispatch(getDogs())
+      : navigate(-1, { replace: true });
   };
+
   return (
     <div className={styles.div}>
       <img src={img} alt="404 not found" />
