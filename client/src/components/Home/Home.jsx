@@ -30,6 +30,8 @@ function Home() {
   const { user } = useAuth0();
   const dogsBySource = filterBySource(dogs, allDogs, source);
   const dogsByTemp = filterByTemp(dogsBySource, allDogs, temp);
+  const isLoading = useSelector((state) => state.isLoading);
+
   useEffect(() => {
     let userData = user
       ? {
@@ -85,26 +87,24 @@ function Home() {
         temp={temp}
       />
       <div className={styles.grid}>
-        {dogsByTemp.length ? (
-          temp !== "All" ? (
-            <DogCard
-              arr={dogsByTemp}
-              indexOfFirstDog={indexOfFirstDog}
-              indexOfLastDog={indexOfLastDog}
-            />
-          ) : (
-            <DogCard
-              arr={dogsBySource}
-              indexOfFirstDog={indexOfFirstDog}
-              indexOfLastDog={indexOfLastDog}
-            />
-          )
-        ) : (
+        {!dogsByTemp.length && !isLoading ? (
           <Empty
             reset={true}
             setOrder={setOrder}
             setTemp={setTemp}
             setSource={setSource}
+          />
+        ) : temp !== "All" ? (
+          <DogCard
+            arr={dogsByTemp}
+            indexOfFirstDog={indexOfFirstDog}
+            indexOfLastDog={indexOfLastDog}
+          />
+        ) : (
+          <DogCard
+            arr={dogsBySource}
+            indexOfFirstDog={indexOfFirstDog}
+            indexOfLastDog={indexOfLastDog}
           />
         )}
       </div>
