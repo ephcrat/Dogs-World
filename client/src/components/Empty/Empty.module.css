@@ -1,0 +1,75 @@
+.div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  --border-width: 2em;
+  --animation-speed: 0.5s;
+  --color: var(--accent);
+  border: solid 3px transparent;
+  padding: 0.5rem;
+  width: 7rem;
+  height: 3rem;
+  border-radius: 0.375rem;
+  border-color: transparent;
+  background-color: var(--primary);
+  cursor: pointer;
+  position: absolute;
+  margin-top: 20rem;
+}
+
+.button:hover {
+  background-color: var(--secondary);
+}
+
+.button::before,
+.button::after {
+  content: "";
+  position: absolute;
+  background: var(--color);
+}
+
+.button:focus::before,
+.button:hover::before {
+  animation: var(--animation-speed) forwards ease-in-out;
+}
+
+.button:focus::after,
+.button:hover::after {
+  animation: var(--animation-speed) forwards ease-in-out;
+}
+
+.button:focus,
+.button:hover {
+  animation: borderColors var(--animation-speed) steps(1) forwards;
+  outline: none;
+}
+
+@keyframes borderColors {
+  0% {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+  33% {
+    border-top-color: var(--color);
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+  66% {
+    border-top-color: var(--color);
+    border-right-color: var(--color);
+    border-bottom-color: transparent;
+    border-left-color: var(--color);
+  }
+  100% {
+    border-top-color: var(--color);
+    border-right-color: var(--color);
+    border-bottom-color: var(--color);
+    border-left-color: var(--color);
+  }
+}

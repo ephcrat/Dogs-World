@@ -6,6 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import { setCurrentPage, SET_CURRENT_PAGE } from "../../actions";
 import { sortOrder, filterBySource, filterByTemp, init } from "../../helpers";
 import DogCard from "../DogCard/DogCard";
+import Empty from "../Empty/Empty";
 import Filters from "../Filters/Filters";
 import Pagination from "../Pagination/Pagination";
 import styles from "./Home.module.css";
@@ -14,7 +15,6 @@ function Home() {
   const [order, setOrder] = useState("a-z");
   const [temp, setTemp] = useState("All");
   const [source, setSource] = useState("All");
-  // const [loading, setLoading] = useState(false);
   const [searchParams] = useSearchParams();
 
   const dogs = useSelector((state) => state.dogs);
@@ -85,17 +85,26 @@ function Home() {
         temp={temp}
       />
       <div className={styles.grid}>
-        {temp !== "All" ? (
-          <DogCard
-            arr={dogsByTemp}
-            indexOfFirstDog={indexOfFirstDog}
-            indexOfLastDog={indexOfLastDog}
-          />
+        {dogsByTemp.length ? (
+          temp !== "All" ? (
+            <DogCard
+              arr={dogsByTemp}
+              indexOfFirstDog={indexOfFirstDog}
+              indexOfLastDog={indexOfLastDog}
+            />
+          ) : (
+            <DogCard
+              arr={dogsBySource}
+              indexOfFirstDog={indexOfFirstDog}
+              indexOfLastDog={indexOfLastDog}
+            />
+          )
         ) : (
-          <DogCard
-            arr={dogsBySource}
-            indexOfFirstDog={indexOfFirstDog}
-            indexOfLastDog={indexOfLastDog}
+          <Empty
+            reset={true}
+            setOrder={setOrder}
+            setTemp={setTemp}
+            setSource={setSource}
           />
         )}
       </div>

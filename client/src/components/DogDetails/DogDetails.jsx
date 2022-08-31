@@ -7,6 +7,7 @@ import { getDogDetails, GET_DOG_DETAILS } from "../../actions";
 import styles from "./DogDetails.module.css";
 import Empty from "../Empty/Empty";
 import { IoArrowBackCircleSharp } from "react-icons/io5";
+import { Loading } from "../Loading/Loading";
 
 function DogDetails() {
   let { name } = useParams();
@@ -18,7 +19,7 @@ function DogDetails() {
   const dispatch = useDispatch();
   const dogDetails = useSelector((state) => state.dogDetails);
   const navigate = useNavigate();
-
+  const isLoading = useSelector((state) => state.isLoading);
   useEffect(() => {
     if (name) {
       dispatch(getDogDetails(nameFormated));
@@ -31,6 +32,14 @@ function DogDetails() {
   const handleClick = function () {
     navigate(-1, { replace: true });
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (!isLoading && !Object.keys(dogDetails).length) {
+    return <Empty />;
+  }
 
   return (
     <div className={styles.container}>
@@ -63,7 +72,11 @@ function DogDetails() {
           </li>
         </ul>
         <h2
-          style={{ textAlign: "center", fontSize: "1.2rem", marginTop: "2rem" }}
+          style={{
+            textAlign: "center",
+            fontSize: "1.2rem",
+            marginTop: "2rem",
+          }}
         >
           Temperaments:
         </h2>

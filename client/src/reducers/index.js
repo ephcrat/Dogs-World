@@ -76,6 +76,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         currentPage: payload,
       };
+    case LOADING:
+      return {
+        ...state,
+        isLoading: payload,
+      };
     default:
       return state;
   }
