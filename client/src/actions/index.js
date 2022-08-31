@@ -11,6 +11,7 @@ export const GET_FAVORITES = "GET FAVORITES";
 export const ADD_FAVORITE = "ADD FAVORITE";
 export const REMOVE_FAVORITES = "REMOVE FAVORITES";
 export const SET_CURRENT_PAGE = "SET CURRENT PAGE";
+export const DELETE_DOG = "DELETE DOG";
 export function getDogs(name) {
   return async function (dispatch) {
     try {
@@ -148,6 +149,15 @@ export function setCurrentPage(payload) {
   return async function (dispatch) {
     dispatch({
       type: SET_CURRENT_PAGE,
+      payload: payload,
+    });
+  };
+}
+export function deleteDog(payload) {
+  return async function (dispatch) {
+    await axios.delete(`/dogs/${payload}`);
+    dispatch({
+      type: DELETE_DOG,
       payload: payload,
     });
   };

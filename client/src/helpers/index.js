@@ -2,6 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
+  deleteDog,
   getDogs,
   getFavorites,
   getTemperaments,
@@ -14,7 +15,7 @@ import img from "../components/Empty/img.png";
 import axios from "axios";
 import { Loading } from "../components/Loading/Loading";
 import Empty from "../components/Empty/Empty";
-
+import { MdDelete } from "react-icons/md";
 export function sortOrder(arr, value) {
   if (!arr) return;
   if (value !== "") {
@@ -104,6 +105,7 @@ export function init({
 export function RenderDog(array, route) {
   const favorites = useSelector((state) => state.favorites);
   const isLoading = useSelector((state) => state.isLoading);
+  const dispatch = useDispatch();
   const { user } = useAuth0();
 
   if (isLoading) {
@@ -116,6 +118,14 @@ export function RenderDog(array, route) {
         return (
           <div className={styles.container} key={dog?.id}>
             <li className={styles.element}>
+              {typeof dog?.id === "string" && (
+                <button
+                  className={styles.delete}
+                  onClick={() => dispatch(deleteDog(dog.name))}
+                >
+                  <MdDelete />
+                </button>
+              )}
               {user && <FavButtons dog={dog} favorites={favorites} />}
               <Link
                 to={`/${route}/${encodeURIComponent(dog?.name).replace(
@@ -126,7 +136,7 @@ export function RenderDog(array, route) {
                 <img
                   className={styles.image}
                   onError={(e) => (e.target.src = img)}
-                  src={dog.image}
+                  src={dog?.image}
                   alt={dog?.name}
                 />
                 <h2 className={styles.name}>{dog?.name}</h2>

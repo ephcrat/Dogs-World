@@ -10,6 +10,7 @@ import {
   ADD_FAVORITE,
   REMOVE_FAVORITES,
   SET_CURRENT_PAGE,
+  DELETE_DOG,
 } from "../actions";
 
 const initialState = {
@@ -81,6 +82,12 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         isLoading: payload,
       };
+    case DELETE_DOG:
+      return {
+        ...state,
+        dogs: state.dogs.filter((d) => d?.name !== payload),
+      };
+   
     default:
       return state;
   }

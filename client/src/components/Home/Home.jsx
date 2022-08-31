@@ -39,7 +39,7 @@ function Home() {
           name: user?.name,
         }
       : null;
-    if (!dogs.length || !favorites.length) {
+    if (!dogs?.length || !favorites?.length) {
       init({
         dispatch,
         dogs,

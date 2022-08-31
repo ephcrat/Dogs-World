@@ -51,7 +51,7 @@ router.post("/", async (req, res) => {
       min_weight: +min_weight,
       max_weight: +max_weight,
       min_life_span: +min_life_span,
-      max_life_span: +min_life_span,
+      max_life_span: +max_life_span,
       image,
       origin,
     });
@@ -75,6 +75,19 @@ router.get("/:name", async (req, res) => {
   try {
     const dog = await getDogsId(name);
     res.json(dog);
+  } catch (err) {
+    console.error(err);
+    res.status(404).send(err.message);
+  }
+});
+
+router.delete("/:name", async (req, res) => {
+  const { name } = req.params;
+  try {
+    await Dog.destroy({
+      where: { name: name },
+    });
+    res.json(`Breed ${name} has been deleted sucessfully`);
   } catch (err) {
     console.error(err);
     res.status(404).send(err.message);
