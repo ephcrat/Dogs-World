@@ -10,3 +10,9 @@
 .username {
   text-align: center;
 }
+
+.notFound {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

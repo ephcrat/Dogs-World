@@ -3,8 +3,19 @@ import styles from "./Input.module.css";
 import { DynamicSelect } from "../../helpers";
 import { useSelector } from "react-redux";
 
-function Input({ data, handleChange, handleTemperaments, error, response }) {
+function Input({
+  data,
+  handleChange,
+  handleTemperaments,
+  error,
+  response,
+  setError,
+}) {
   const temperaments = useSelector((state) => state.temperaments);
+
+  const handleClick = function (e) {
+    if (error) setError(null);
+  };
   return (
     <div className={styles.container}>
       <div className={styles.div}>
@@ -169,7 +180,9 @@ function Input({ data, handleChange, handleTemperaments, error, response }) {
         {error ? <p style={{ color: "red" }}>{error}</p> : <p>{response}</p>}
       </div>
       <div className={styles.button}>
-        <button type="submit">Create Dog</button>
+        <button type="submit" onClick={(e) => handleClick(e)}>
+          Create Dog
+        </button>
       </div>
     </div>
   );

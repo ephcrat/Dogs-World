@@ -10,7 +10,10 @@ import {
 } from "../actions";
 import FavButtons from "../components/Favorites/FavButtons";
 import styles from "../components/DogCard/DogCard.module.css";
-import { useState } from "react";
+import img from "../components/Empty/img.png";
+import axios from "axios";
+import { Loading } from "../components/Loading/Loading";
+import Empty from "../components/Empty/Empty";
 
 export function sortOrder(arr, value) {
   if (!arr) return;
@@ -100,7 +103,17 @@ export function init({
 
 export function RenderDog(array, route) {
   const favorites = useSelector((state) => state.favorites);
+  const isLoading = useSelector((state) => state.isLoading);
   const { user } = useAuth0();
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  // if(!isLoading && !array.length) {
+  //   return <Empty reset={true}/>
+  // }
+
   return (
     <ul className={styles.card}>
       {array?.map((dog) => {
@@ -116,7 +129,7 @@ export function RenderDog(array, route) {
               >
                 <img
                   className={styles.image}
-                  src={dog?.image}
+                  src={dog.image ? dog.image : img}
                   alt={dog?.name}
                 />
                 <h2 className={styles.name}>{dog?.name}</h2>
@@ -139,4 +152,9 @@ export function RenderDog(array, route) {
       })}
     </ul>
   );
+}
+export function resetFilters(setOrder, setTemp, setSource) {
+  setOrder("a-z");
+  setTemp("All");
+  setSource("All");
 }

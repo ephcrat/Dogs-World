@@ -14,9 +14,11 @@ export const SET_CURRENT_PAGE = "SET CURRENT PAGE";
 export function getDogs(name) {
   return async function (dispatch) {
     try {
+      dispatch({ type: LOADING, payload: true });
       const response = await axios.get(`/dogs${name ? `?name=${name}` : `/`}`);
       dispatch({ type: GET_DOGS, payload: response.data });
       dispatch({ type: SET_CURRENT_PAGE, payload: 1 });
+      dispatch({ type: LOADING, payload: false });
     } catch (err) {
       console.error(err.message);
     }
@@ -31,6 +33,7 @@ export function getDogDetails(payload) {
       dispatch({ type: GET_DOG_DETAILS, payload: response.data });
       dispatch({ type: LOADING, payload: false });
     } catch (err) {
+      dispatch({ type: LOADING, payload: false });
       console.error(err.message);
     }
   };
