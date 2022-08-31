@@ -8,7 +8,7 @@ import styles from "./DogDetails.module.css";
 import Empty from "../Empty/Empty";
 import { IoArrowBackCircleSharp } from "react-icons/io5";
 import { Loading } from "../Loading/Loading";
-
+import img from "../Empty/img.png";
 function DogDetails() {
   let { name } = useParams();
 
@@ -53,7 +53,11 @@ function DogDetails() {
         </button>
       </div>
       <div className={styles.image}>
-        <img src={dogDetails?.image} alt={dogDetails?.name} />
+        <img
+          onError={(e) => (e.target.src = img)}
+          src={dogDetails?.image}
+          alt={dogDetails?.name}
+        />
       </div>
       <div className={styles.detailsDiv}>
         <div className={styles.name}>

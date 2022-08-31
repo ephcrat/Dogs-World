@@ -100,7 +100,7 @@ function CreateDog() {
         +data.min_life_span > +data.max_life_span
       )
         return setError(
-          "The minimum life_span cannot be higher than the maximum life_span and has to be a number"
+          "The minimum lifespan cannot be higher than the maximum lifespan and has to be a number"
         );
 
       if (!regExLetters.test(data.origin) || data.origin.length < 3)
