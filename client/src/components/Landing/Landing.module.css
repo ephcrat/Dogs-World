@@ -1,28 +1,49 @@
 .wrapper {
-  min-height: 100%;
-  min-width: 100%;
-  background: var(--background-gradient);
+  height: 90vh;
+  width: 100%;
+  background: url("img-3.jpg");
+  background-size: 15rem;
   color: var(--text-primary);
+  position: absolute;
 }
 
-.img1Wrapper {
+.image1Div {
+  /* width: 15rem; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-right: 16rem !important;
 }
 .img1 {
-  width: 50vh;
-  height: 50vh;
-  margin-left: 20rem;
-  position: fixed;
+  width: 11rem;
+  height: 13rem;
   bottom: 0;
+  position: absolute;
 }
 
-.img3Wrapper {
-}
-.img3 {
-  width: 30vh;
-  height: 60vh;
+.img2 {
+  width: 15rem;
+  height: 15rem;
   margin-top: 32vh;
   position: fixed;
   bottom: 0;
+}
+
+.img4 {
+  width: 15rem;
+  height: 15rem;
+  margin-top: 32vh;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+.buttonDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .button {
@@ -37,8 +58,12 @@
   height: 2.5rem;
   width: 7rem;
   cursor: pointer;
-  margin-left: 35rem;
-  margin-top: 7.5rem;
+
+  /* margin-top: 7.5rem; */
+}
+
+a {
+  text-decoration: none;
 }
 
 .button:hover {
@@ -65,6 +90,19 @@
 .button:hover {
   animation: borderColors var(--animation-speed) steps(1) forwards;
   outline: none;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.logo img {
+  width: 17rem;
+  height: 17rem;
+  position: relative;
 }
 
 @keyframes borderColors {

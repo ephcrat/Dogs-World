@@ -69,7 +69,6 @@ function Home() {
     dogsByTemp.length,
     page,
   ]);
-  console.log(page);
   sortOrder(dogs, order);
 
   // Get dogs index for current page - for page 1: 0, 8, page 2: 8, 16;

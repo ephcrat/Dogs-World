@@ -1,9 +1,7 @@
 import React from "react";
-
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTemperaments, getDogs } from "../../actions";
-
 import axios from "axios";
 import Input from "../Input/Input";
 import styles from "./CreateDog.module.css";
@@ -26,7 +24,7 @@ function CreateDog() {
   const [response, setResponse] = useState(null);
   const regExLetters = /^[a-zA-Z\s]*$/;
   const regExURL =
-    /^(http(s)?:\/\/)?(www.)?([a-zA-Z0-9])+([\-\.]{1}[a-zA-Z0-9]+)*\.[a-zA-Z]{2,5}(:[0-9]{1,5})?(\/[^\s]*)?$/gm; //https://stackoverflow.com/a/55468411/19504474
+    /^(http(s)?:\/\/)?(www.)?([a-zA-Z0-9])+([-.]{1}[a-zA-Z0-9]+)*\.[a-zA-Z]{2,5}(:[0-9]{1,5})?(\/[^\s]*)?$/gm; //https://stackoverflow.com/a/55468411/19504474
   const temperaments = useSelector((state) => state.temperaments);
   const dispatch = useDispatch();
 

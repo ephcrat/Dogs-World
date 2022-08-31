@@ -5,7 +5,7 @@ import styles from "./Navbar.module.css";
 import logo from "./logo.png";
 import { useAuth0 } from "@auth0/auth0-react";
 import AuthButtons from "../Auth/AuthButtons";
-import { setCurrentPage, getDogs } from "../../actions";
+import { getDogs } from "../../actions";
 import { useSelector, useDispatch } from "react-redux";
 function Navbar() {
   const { isLoading } = useAuth0();

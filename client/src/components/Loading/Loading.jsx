@@ -5,15 +5,15 @@ export function Loading() {
   return (
     <svg className={styles.svg} viewBox="0 0 960 300">
       <symbol id="s-text">
-        <text text-anchor="middle" x="50%" y="80%">
+        <text textAnchor="middle" x="50%" y="80%">
           Loading.{" "}
         </text>
-        <text text-anchor="middle" x="52%" y="80%">
+        <text textAnchor="middle" x="52%" y="80%">
           Loading.{" "}
         </text>
       </symbol>
 
-      <g class="g-ants">
+      <g className="g-ants">
         <use href="#s-text" className={styles.textCopy}></use>
         <use href="#s-text" className={styles.textCopy}></use>
         <use href="#s-text" className={styles.textCopy}></use>

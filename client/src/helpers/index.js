@@ -7,14 +7,11 @@ import {
   getFavorites,
   getTemperaments,
   getUser,
-  SET_CURRENT_PAGE,
 } from "../actions";
 import FavButtons from "../components/Favorites/FavButtons";
 import styles from "../components/DogCard/DogCard.module.css";
 import img from "../components/Empty/img.png";
-import axios from "axios";
 import { Loading } from "../components/Loading/Loading";
-import Empty from "../components/Empty/Empty";
 import { MdDelete } from "react-icons/md";
 export function sortOrder(arr, value) {
   if (!arr) return;
