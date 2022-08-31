@@ -5,6 +5,7 @@ import { getDogs } from "../../actions";
 import styles from "./Search.module.css";
 import { useSearchParams } from "react-router-dom";
 import { TbRefresh } from "react-icons/tb";
+import {BiSearchAlt} from "react-icons/bi"
 function Search() {
   const [input, setInput] = useState("");
   const [error, setError] = useState(null);
@@ -47,7 +48,7 @@ function Search() {
           type="submit"
           onClick={(e) => handleSubmit(e)}
         >
-          Find
+          <BiSearchAlt />
         </button>
         <button
           className={styles.buttonRefresh}

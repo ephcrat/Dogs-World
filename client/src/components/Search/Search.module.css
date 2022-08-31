@@ -36,16 +36,18 @@
 
 .button,
 .buttonRefresh {
-  background-color: var(--buttons);
+  background-color: transparent;
   height: 1.5rem;
   width: 4rem;
   position: absolute;
   cursor: pointer;
   box-sizing: border-box;
   margin-top: 0.25rem;
-  margin-left: 10rem;
+  margin-left: 12rem;
   font-weight: 300;
   border-radius: 9999px;
+  font-size: 1.5rem;
+  color: var(--third);
 }
 
 .buttonRefresh {
