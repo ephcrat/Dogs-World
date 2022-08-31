@@ -2,7 +2,7 @@ import React from "react";
 
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTemperaments } from "../../actions";
+import { getTemperaments, getDogs } from "../../actions";
 
 import axios from "axios";
 import Input from "../Input/Input";
@@ -113,6 +113,7 @@ function CreateDog() {
         const post = await axios.post("/dogs", data);
         setResponse(post.data);
         setData({ ...emptyData, temperament: data.temperament });
+        dispatch(getDogs());
       }
     } catch (err) {
       console.error(err.message);
