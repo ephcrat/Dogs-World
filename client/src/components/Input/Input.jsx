@@ -59,7 +59,7 @@ function Input({
           <input
             type="range"
             min="0"
-            max="120"
+            max="100"
             step="1"
             className={styles.thumbOne}
             name={"min_weight"}
@@ -70,7 +70,7 @@ function Input({
           <input
             type="range"
             min="0"
-            max="120"
+            max="100"
             step="1"
             className={styles.thumbTwo}
             name={"max_weight"}
@@ -94,7 +94,7 @@ function Input({
           <input
             type="range"
             min="0"
-            max="300"
+            max="150"
             step="1"
             className={styles.thumbOne}
             name={"min_height"}
@@ -105,7 +105,7 @@ function Input({
           <input
             type="range"
             min="0"
-            max="300"
+            max="150"
             step="1"
             className={styles.thumbTwo}
             name={"max_height"}

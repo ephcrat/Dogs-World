@@ -12,9 +12,9 @@ function CreateDog() {
   const emptyData = {
     name: "",
     min_weight: 1,
-    max_weight: 120,
+    max_weight: 100,
     min_height: 1,
-    max_height: 300,
+    max_height: 150,
     min_life_span: 1,
     max_life_span: 20,
     origin: "",
@@ -23,7 +23,6 @@ function CreateDog() {
   };
   const [data, setData] = useState(emptyData);
   const [error, setError] = useState(null);
-  const [isError, setIsError] = useState(false);
   const [response, setResponse] = useState(null);
   const regExLetters = /^[a-zA-Z\s]*$/;
   const regExURL =
@@ -37,7 +36,7 @@ function CreateDog() {
 
   function handleChange(e) {
     setData((prev) => {
-      if (!e.target.value.length) setError(null) && setIsError(false);
+      if (!e.target.value.length) setError(null);
       return { ...prev, [e.target.name]: e.target.value };
     });
   }
@@ -71,58 +70,45 @@ function CreateDog() {
   async function handleSubmit(e) {
     e.preventDefault();
     setError(null);
-    setIsError(false);
+
     try {
-      setIsError(false);
       if (!data.temperament.length)
-        return (
-          setError("At least 1 temperament is required") && setIsError(true)
-        );
+        return setError("At least 1 temperament is required");
       if (!regExLetters.test(data.name) || data.name.length < 3)
-        return (
-          setError(
-            "The name cannot contain numbers or special characters and must have a minimum length of 3 characters"
-          ) && setIsError(true)
+        return setError(
+          "The name cannot contain numbers or special characters and must have a minimum length of 3 characters"
         );
       if (
         isNaN(+data.min_weight) ||
         isNaN(+data.max_weight) ||
         +data.min_weight > +data.max_weight
       )
-        return (
-          setError(
-            "The minimum weight cannot be higher than the maximum weight and has to be a number"
-          ) && setIsError(true)
+        return setError(
+          "The minimum weight cannot be higher than the maximum weight and has to be a number"
         );
       if (
         isNaN(+data.min_height) ??
         isNaN(+data.max_height) ??
         +data.min_height > +data.max_height
       )
-        return (
-          setError(
-            "The minimum height cannot be higher than the maximum height and has to be a number"
-          ) && setIsError(true)
+        return setError(
+          "The minimum height cannot be higher than the maximum height and has to be a number"
         );
       if (
         isNaN(+data.min_life_span) ??
         isNaN(+data.max_life_span) ??
         +data.min_life_span > +data.max_life_span
       )
-        return (
-          setError(
-            "The minimum life_span cannot be higher than the maximum life_span and has to be a number"
-          ) && setIsError(true)
+        return setError(
+          "The minimum life_span cannot be higher than the maximum life_span and has to be a number"
         );
 
       if (!regExLetters.test(data.origin) || data.origin.length < 3)
-        return (
-          setError(
-            "The origin cannot contain numbers or special characters and must have a minimum length of 3 characters"
-          ) && setIsError(true)
+        return setError(
+          "The origin cannot contain numbers or special characters and must have a minimum length of 3 characters"
         );
       if (!regExURL.test(data.image))
-        return setError("The image has to be a URL") && setIsError(true);
+        return setError("The image has to be a URL");
       if (!error) {
         const post = await axios.post("/dogs", data);
         setResponse(post.data);

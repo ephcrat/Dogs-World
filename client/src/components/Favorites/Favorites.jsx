@@ -9,7 +9,6 @@ function Favorites() {
   const favorites = useSelector((state) => state.favorites);
   const userReducer = useSelector((state) => state.user);
   const { user } = useAuth0();
-
   return user ? (
     <div>
       <h1 className={styles.username}>{userReducer.name} Favorite Dogs</h1>
