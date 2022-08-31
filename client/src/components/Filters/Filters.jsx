@@ -1,24 +1,25 @@
 import React from "react";
+import { useSearchParams } from "react-router-dom";
 
 import { DynamicSelect } from "../../helpers";
 import styles from "./Filters.module.css";
 
 function Filters({ temperaments, setOrder, setSource, setTemp, temp }) {
-
+  const [, setSearchParams] = useSearchParams();
 
   function handleSource(e) {
     setSource(e.target.value);
+    setSearchParams({ page: 1 });
   }
 
   const handleTemperaments = function (e) {
     setTemp(e.target.value);
+    setSearchParams({ page: 1 });
   };
 
   function handleOrder(e) {
     setOrder(e.target.value);
   }
-
-  
 
   return (
     <div>
