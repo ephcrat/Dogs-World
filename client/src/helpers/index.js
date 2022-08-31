@@ -110,10 +110,6 @@ export function RenderDog(array, route) {
     return <Loading />;
   }
 
-  // if(!isLoading && !array.length) {
-  //   return <Empty reset={true}/>
-  // }
-
   return (
     <ul className={styles.card}>
       {array?.map((dog) => {
@@ -129,7 +125,8 @@ export function RenderDog(array, route) {
               >
                 <img
                   className={styles.image}
-                  src={dog.image ? dog.image : img}
+                  onError={(e) => (e.target.src = img)}
+                  src={dog.image}
                   alt={dog?.name}
                 />
                 <h2 className={styles.name}>{dog?.name}</h2>
