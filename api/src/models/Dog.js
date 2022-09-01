@@ -21,7 +21,10 @@ module.exports = (sequelize) => {
         set(val) {
           this.setDataValue(
             "name",
-            `${val[0].toUpperCase()}${val.slice(1).toLowerCase()}` //first letter in uppercase and the rest  in lowercase
+            val
+              .split(" ")
+              .map((n) => `${n[0].toUpperCase()}${n.slice(1).toLowerCase()}`)
+              .join(" ") //first letter in uppercase and the rest  in lowercase
           );
         },
       },
