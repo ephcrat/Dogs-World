@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getDogs } from "../../actions";
 import styles from "./Search.module.css";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { TbRefresh } from "react-icons/tb";
 import { BiSearchAlt } from "react-icons/bi";
 function Search() {
@@ -12,6 +12,7 @@ function Search() {
   const regExLetters = /^[a-zA-Z\s]*$/;
   const dispatch = useDispatch();
   const [, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -19,10 +20,8 @@ function Search() {
       return setError(
         "Breed names cannot contain numbers or special characters"
       );
-
     dispatch(getDogs(input));
     setError("");
-    setSearchParams({ name: input });
     setInput("");
   }
   function handleChange(e) {
@@ -47,7 +46,10 @@ function Search() {
         <button
           className={styles.button}
           type="submit"
-          onClick={(e) => handleSubmit(e)}
+          onClick={(e) => {
+            handleSubmit(e);
+            navigate("../dogs", { replace: true });
+          }}
         >
           <BiSearchAlt />
         </button>
