@@ -2,17 +2,18 @@ import { useNavigate } from "react-router-dom";
 import img from "./img.png";
 import styles from "./Empty.module.css";
 
-import { useDispatch } from "react-redux";
 import { resetFilters } from "../../helpers";
+import { useDispatch } from "react-redux";
 import { getDogs } from "../../actions";
+
 function Empty({ reset, setOrder, setTemp, setSource }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleClick = function () {
-    reset
-      ? resetFilters(setOrder, setTemp, setSource) && dispatch(getDogs())
-      : navigate(-1, { replace: true });
+    resetFilters(setOrder, setTemp, setSource);
+    dispatch(getDogs());
+    navigate("../dogs", { replace: true });
   };
 
   return (

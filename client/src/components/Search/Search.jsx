@@ -5,7 +5,7 @@ import { getDogs } from "../../actions";
 import styles from "./Search.module.css";
 import { useSearchParams } from "react-router-dom";
 import { TbRefresh } from "react-icons/tb";
-import {BiSearchAlt} from "react-icons/bi"
+import { BiSearchAlt } from "react-icons/bi";
 function Search() {
   const [input, setInput] = useState("");
   const [error, setError] = useState(null);
@@ -23,6 +23,7 @@ function Search() {
     dispatch(getDogs(input));
     setError("");
     setSearchParams({ name: input });
+    setInput("");
   }
   function handleChange(e) {
     setInput(e.target.value);

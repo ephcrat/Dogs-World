@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { DynamicSelect } from "../../helpers";
 import styles from "./Filters.module.css";
 
-function Filters({ temperaments, setOrder, setSource, setTemp, temp }) {
+function Filters({ temperaments, setOrder, setSource, setTemp }) {
   const [, setSearchParams] = useSearchParams();
 
   function handleSource(e) {

@@ -54,6 +54,7 @@ function Home() {
     if (page) {
       dispatch(setCurrentPage(page));
     }
+
     return () => {
       dispatch({ type: SET_CURRENT_PAGE, payload: 1 });
     };
@@ -83,7 +84,6 @@ function Home() {
         setOrder={setOrder}
         setSource={setSource}
         setTemp={setTemp}
-        temp={temp}
       />
       <div className={styles.grid}>
         {!dogsByTemp.length && !isLoading ? (
