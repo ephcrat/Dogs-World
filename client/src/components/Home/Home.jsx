@@ -15,8 +15,8 @@ function Home() {
   const [order, setOrder] = useState("a-z");
   const [temp, setTemp] = useState("All");
   const [source, setSource] = useState("All");
+  const [isReset, setReset] = useState(false)
   const [searchParams] = useSearchParams();
-
   const dogs = useSelector((state) => state.dogs);
   const temperaments = useSelector((state) => state.temperaments);
   const userReducer = useSelector((state) => state.user);
@@ -84,6 +84,8 @@ function Home() {
         setOrder={setOrder}
         setSource={setSource}
         setTemp={setTemp}
+        isReset={isReset}
+        setReset={setReset}
       />
       <div className={styles.grid}>
         {!dogsByTemp.length && !isLoading ? (
@@ -92,6 +94,7 @@ function Home() {
             setOrder={setOrder}
             setTemp={setTemp}
             setSource={setSource}
+            setReset={setReset}
           />
         ) : temp !== "All" ? (
           <DogCard

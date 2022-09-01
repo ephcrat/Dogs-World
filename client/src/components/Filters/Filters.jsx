@@ -4,9 +4,8 @@ import { useSearchParams } from "react-router-dom";
 import { DynamicSelect } from "../../helpers";
 import styles from "./Filters.module.css";
 
-function Filters({ temperaments, setOrder, setSource, setTemp }) {
+function Filters({ temperaments, setOrder, setSource, setTemp, isReset, setReset}) {
   const [, setSearchParams] = useSearchParams();
-
   function handleSource(e) {
     setSource(e.target.value);
     setSearchParams({ page: 1 });
@@ -22,7 +21,7 @@ function Filters({ temperaments, setOrder, setSource, setTemp }) {
   }
 
   return (
-    <div>
+    <div key={isReset}>
       <div className={styles.filters}>
         <select
           onChange={(e) => handleOrder(e)}

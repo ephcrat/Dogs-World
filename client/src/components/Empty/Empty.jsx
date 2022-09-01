@@ -6,13 +6,15 @@ import { resetFilters } from "../../helpers";
 import { useDispatch } from "react-redux";
 import { getDogs } from "../../actions";
 
-function Empty({ setOrder, setTemp, setSource }) {
+function Empty({ setOrder, setTemp, setSource, setReset }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleClick = function () {
     if (setOrder && setTemp && setSource) {
+      setReset(true);
       resetFilters(setOrder, setTemp, setSource);
+      setTimeout(() => setReset(false), 100);
     }
 
     dispatch(getDogs());

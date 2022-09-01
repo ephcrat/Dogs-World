@@ -35,6 +35,7 @@ const initialState = {
   isLoading: false,
   currentPage: 1,
   dogsPerPage: 8,
+  isReset: false,
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -87,7 +88,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         dogs: state.dogs.filter((d) => d?.name !== payload),
       };
-   
+    case "RESET_FILTER":
+      return {
+        ...state,
+        isReset: true,
+      };
     default:
       return state;
   }

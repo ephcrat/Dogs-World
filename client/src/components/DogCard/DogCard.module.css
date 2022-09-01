@@ -1,5 +1,5 @@
 .element {
-  height: 21rem;
+  height: 25.4rem;
   width: 16rem;
   border-radius: 10px;
   background-color: var(--primary);
@@ -27,9 +27,10 @@
 }
 
 .image {
-  height: 12rem;
+  height: 16rem;
   width: 16rem;
   border-radius: 10px;
+  object-fit: cover;
 }
 
 .element:hover {

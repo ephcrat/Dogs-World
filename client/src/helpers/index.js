@@ -47,11 +47,13 @@ export function DynamicSelect(arr, handler) {
       </li>
     ));
   }
-  return arr.map((el) => (
-    <option key={el.id} value={el.name}>
-      {el.name}
-    </option>
-  ));
+  return arr.map((el) => {
+    return (
+      <option key={el.id} value={el.name}>
+        {el.name}
+      </option>
+    );
+  });
 }
 
 export function filterByTemp(arr, defaultArr, temp) {
