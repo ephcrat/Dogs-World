@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { setCurrentPage } from "../../actions";
 import styles from "./Pagination.module.css";
@@ -7,7 +7,7 @@ import { useSearchParams } from "react-router-dom";
 function Pagination({ allDogsLength }) {
   const currentPage = useSelector((state) => state.currentPage);
   const dogsPerPage = useSelector((state) => state.dogsPerPage);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   const numPages = [];
 

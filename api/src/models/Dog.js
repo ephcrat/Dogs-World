@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
-        validate: { is: /^[a-z]+$/i },
+        validate: { is: /^[a-zA-Z\s]*$/ },
         set(val) {
           this.setDataValue(
             "name",
