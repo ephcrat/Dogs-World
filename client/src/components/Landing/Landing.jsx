@@ -15,9 +15,6 @@ function Landing() {
       <div className={styles.image2}>
         <img className={styles.img2} src={img2} alt="Brown dog left" />
       </div>
-      <div className={styles.image1Div}>
-        <img className={styles.img1} src={img1} alt="Black dog" />
-      </div>
       <div className={styles.image4Div}>
         <img className={styles.img4} src={img4} alt="Brown dog right" />
       </div>
